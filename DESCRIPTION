@@ -1,0 +1,18 @@
+Package: bluegrafi
+Type: Package
+Title: Psychometric properties for SEM models 
+Version: 0.1.0
+Author@R: person("Juan Carlos", "Saravia", email = "jsaraviadrago@gmail.com",
+	role = c("aut", "cre"))
+Author: Juan Carlos Saravia <jsaraviadrago@gmail.com>
+Maintainer: Juan Carlos Saravia <jsaraviadrago@gmail.com>
+Description: An implementation of average variance error and composite reliability for Confirmatory factor analysis. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+	 dplyr (>= 0.8.3),
+	 GPArotation  	(>= 2014.11-1),
+	 lavaan (>= 0.6-4),
+	 psych (>= 1.8.12)
+RoxygenNote: 6.1.1.9000
