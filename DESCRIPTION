@@ -8,6 +8,7 @@ Author: Juan Carlos Saravia <jsaraviadrago@gmail.com>
 Maintainer: Juan Carlos Saravia <jsaraviadrago@gmail.com>
 Description: An implementation of average variance error and composite reliability for Confirmatory factor analysis. 
 License: MIT + file LICENSE
+URL: https://github.com/jsaraviadrago/bluegrafi
 Encoding: UTF-8
 LazyData: true
 Imports: 
