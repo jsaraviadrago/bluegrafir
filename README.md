@@ -1,4 +1,5 @@
-# Package to calculate composite reliability AVE
-- Composite reliability by Raykov
-- Average variance error (AVE)
+### Package to calculate composite reliability and AVE
+
+- Composite reliability 
+- Average variance extracted (AVE)
 

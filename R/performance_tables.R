@@ -1,6 +1,6 @@
 #' Table of overall fit measures for a CFA and SEM models
 #'
-#'This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a CFA and SEM model.
+#' This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a CFA and SEM model.
 #'
 #' @name grafi
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
