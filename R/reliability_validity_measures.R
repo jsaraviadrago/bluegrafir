@@ -7,7 +7,6 @@
 #' A different formula is needed for when indicators share at least one error covariance.
 #' In this case the total variance is calculated by adding the sum of the unstandarized error variance multiplied by 2.
 #'
-#'
 #' @name crel
 #' @seealso Kline, R. (2016). Principles and Practice of Structural Equation Modeling. Fourth Edition. Guilford press. NY.
 #' @seealso Raykov, T. (2004). Behavioral scale realiability and measurement invariance evaluation using latent variable modeling. Behavior therapy, 35, 299-331.

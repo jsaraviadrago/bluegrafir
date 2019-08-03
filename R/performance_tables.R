@@ -2,7 +2,7 @@
 #'
 #'This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a CFA and SEM model.
 #'
-#'@name grafi
+#' @name grafi
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
 #' @return The output is a data.frame that gives you overall fit indices for CFA and SEM models.
 #' For example: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
