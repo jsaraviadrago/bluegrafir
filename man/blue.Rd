@@ -14,7 +14,6 @@ This function needs a psych and GPArotation object from the omegaSem function to
 }
 \examples{
 \donttest{blue(fit)}
-
 }
 \author{
 Juan Carlos Saravia

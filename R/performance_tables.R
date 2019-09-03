@@ -9,7 +9,7 @@
 #' @importFrom dplyr "%>%"
 #' @author Juan Carlos Saravia
 #' @examples \donttest{grafi(fit)}
-#'
+#' @export
 #'
 globalVariables("indices")
 grafi <- function(x) {
@@ -42,7 +42,7 @@ grafi <- function(x) {
 #' @importFrom dplyr select
 #' @author Juan Carlos Saravia
 #' @examples \donttest{blue(fit)}
-#'
+#' @export
 globalVariables(c("total", "omegarel", "varmax",
                   "Factor", "Omega"))
 blue <- function(x) {

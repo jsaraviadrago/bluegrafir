@@ -19,7 +19,6 @@ In this case the total variance is calculated by adding the sum of the unstandar
 }
 \examples{
 \donttest{crel(fit)}
-
 }
 \seealso{
 Kline, R. (2016). Principles and Practice of Structural Equation Modeling. Fourth Edition. Guilford press. NY.

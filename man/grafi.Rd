@@ -15,8 +15,6 @@ This function needs a lavaan object with a model fit to work. It creates a table
 }
 \examples{
 \donttest{grafi(fit)}
-
-
 }
 \author{
 Juan Carlos Saravia

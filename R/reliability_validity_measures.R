@@ -21,7 +21,7 @@
 #' @importFrom lavaan inspect
 #' @author Juan Carlos Saravia
 #' @examples \donttest{crel(fit)}
-#'
+#' @export
 globalVariables(c("op", "variance", "lhs",
                   "est", "covariance"))
 crel <- function(x) {
@@ -93,6 +93,7 @@ crel <- function(x) {
 #' @importFrom dplyr select
 #' @author Juan Carlos Saravia
 #' @examples \donttest{ave(fit)}
+#' @export
 globalVariables(c("op", "lhs", "AVE"))
 ave <- function(x) {
   # Extracting distribution of items per factor
