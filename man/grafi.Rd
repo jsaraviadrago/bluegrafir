@@ -6,7 +6,7 @@
 \arguments{
 \item{x}{lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.}
 
-\item{y}{specify the amount of rows to show in the modification indexes table.}
+\item{y}{specify the amount of rows to show in the modification indexes table. The default is 5 rows.}
 }
 \value{
 The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
