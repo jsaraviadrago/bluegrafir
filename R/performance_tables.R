@@ -4,6 +4,7 @@
 #'
 #' @name grafi
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
+#' @param y specify the amount of rows to show in the modification indexes table.
 #' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
 #' Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
 #' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values
