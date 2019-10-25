@@ -9,6 +9,7 @@
 #' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values
 #' @importFrom dplyr "%>%"
 #' @importFrom dplyr select
+#' @importFrom  dplyr as.tbl
 #' @author Juan Carlos Saravia
 #' @examples \donttest{grafi(fit)}
 #' @export
@@ -23,13 +24,13 @@ grafi <- function(x, y = 5) {
   tabla <- tabla %>%
     dplyr::filter(indices %in% names)
   tabla$indices <-  dplyr::recode(tabla$indices,
-                           chisq = "Chi2",
-                           df = "df",
-                           pvalue = "sig",
-                           cfi = "CFI",
-                           tli = "TLI",
-                           rmsea = "RMSEA",
-                           srmr = "SRMR")
+                                  chisq = "Chi2",
+                                  df = "df",
+                                  pvalue = "sig",
+                                  cfi = "CFI",
+                                  tli = "TLI",
+                                  rmsea = "RMSEA",
+                                  srmr = "SRMR")
   tabla <- tabla[,c(2,1)]
   tabla1 <- lavaan::parameterEstimates(x, standardized=TRUE) %>%
     filter(op == "=~") %>%
@@ -41,10 +42,13 @@ grafi <- function(x, y = 5) {
   mi <- lavaan::inspect(x,"mi")
   mi.order <- mi[order(-mi$mi),]
   tabla2 <- mi.order[1:y,] %>%
-    select(Variable = lhs,
+    select(Variable_1 = lhs,
            relationship = op,
-           Variable = rhs,
+           Variable_2 = rhs,
            MI = mi)
+  tabla <- as.tbl(tabla)
+  tabla1 <- as.tbl(tabla1)
+  tabla2 <- as.tbl(tabla2)
   tabla_general <- list(tabla,tabla1,tabla2)
   tabla_general
 }
