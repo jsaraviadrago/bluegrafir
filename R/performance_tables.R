@@ -1,69 +1,13 @@
-#' Table of overall fit measures for a CFA models
-#'
-#' This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a CFA model.
-#'
-#' @name grafi
-#' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
-#' @param mi.nrows specify the amount of rows to show in the modification indexes table. The default is 5 rows.
-#' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
-#' Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
-#' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values
-#' I want to thank Rose Hartmann for the code in her web page thank helped me finish one part of the function.
-#' @importFrom dplyr "%>%"
-#' @importFrom dplyr select
-#' @importFrom dplyr as.tbl
-#' @author Juan Carlos Saravia
-#' @examples \donttest{grafi(fit)}
-#' @export
-#'
-globalVariables (c("indices", "rhs", "se",
-                "z", "pvalue", "std.all"))
-grafi <- function(x, mi.nrows = 5) {
-  tabla <- data.frame(lavaan::fitMeasures(x))
-  colnames(tabla)[1] <- "Fit Measures"
-  names <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr")
-  tabla$indices <- rownames(tabla)
-  tabla <- tabla %>%
-    dplyr::filter(indices %in% names)
-  tabla$indices <-  dplyr::recode(tabla$indices,
-                                  chisq = "Chi2",
-                                  df = "df",
-                                  pvalue = "sig",
-                                  cfi = "CFI",
-                                  tli = "TLI",
-                                  rmsea = "RMSEA",
-                                  srmr = "SRMR")
-  tabla <- tabla[,c(2,1)]
-  tabla1 <- lavaan::parameterEstimates(x, standardized=TRUE) %>%
-    filter(op == "=~") %>%
-    select('Latent Factor'=lhs,
-           Variable=rhs, B=est,
-           SE=se, Z=z,
-           'p-value'=pvalue,
-           Beta=std.all)
-  mi <- lavaan::inspect(x,"mi")
-  mi.order <- mi[order(-mi$mi),]
-  tabla2 <- mi.order[1:mi.nrows,] %>%
-    select(Variable_1 = lhs,
-           relationship = op,
-           Variable_2 = rhs,
-           MI = mi)
-  tabla <- as.tbl(tabla)
-  tabla1 <- as.tbl(tabla1)
-  tabla2 <- as.tbl(tabla2)
-  tabla_general <- list(tabla,tabla1,tabla2)
-  tabla_general
-}
-
-#'Table of overall fit measures for a SEM models
+#'Table of overall fit measures for a CFA and SEM models
 #'
 #'This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a SEM model.
-#' @name grafi2
-#' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
+#' @name grafi
+#' @param x lavaan object: The name of the model fit that was calculated from the specified CFA or SEM model in the lavaan package.
 #' @param mi.nrows specify the amount of rows to show in the modification indexes table. The default is 5 rows.
-#' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
+#' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA or SEM models.
 #' Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
 #' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values.
+#' I want to thank Rose Hartmann because with her web page I was able to make one chunk of this function.
 #' @importFrom dplyr "%>%"
 #' @importFrom dplyr select
 #' @importFrom dplyr as.tbl
@@ -77,7 +21,7 @@ grafi <- function(x, mi.nrows = 5) {
 #'
 globalVariables (c("indices", "rhs", "se",
                    "z", "pvalue", "std.all"))
-grafi2 <- function(x, mi.nrows = 5) {
+grafi <- function(x, mi.nrows = 5) {
   tabla <- data.frame(lavaan::fitMeasures(x))
   colnames(tabla)[1] <- "Fit Measures"
   names <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr")
@@ -93,8 +37,9 @@ grafi2 <- function(x, mi.nrows = 5) {
                                   rmsea = "RMSEA",
                                   srmr = "SRMR")
   tabla <- tabla[,c(2,1)]
+  analysis <- c("~", "~~", ":=")
   tabla1 <- parameterEstimates(x, standardized=TRUE) %>%
-    filter(op == "~" ) %>%
+    filter(op %in% analysis) %>%
     select('Dep variable'=lhs,
            Relationship=op,
            'Ind variable'=rhs,
@@ -104,16 +49,6 @@ grafi2 <- function(x, mi.nrows = 5) {
            'p-value'=pvalue,
            Beta=std.all)
   tabla2 <- parameterEstimates(x, standardized=TRUE) %>%
-    filter(op == "~~") %>%
-    select('Dep variable'=lhs,
-           Relationship=op,
-           'Ind variable'=rhs,
-           B=est,
-           SE=se,
-           Z=z,
-           'p-value'=pvalue,
-           Beta=std.all)
-  tabla3 <- parameterEstimates(x, standardized=TRUE) %>%
     filter(op == "=~") %>%
     select('Latent factor'=lhs,
            'Variable'=rhs,
@@ -124,20 +59,19 @@ grafi2 <- function(x, mi.nrows = 5) {
            Beta=std.all)
   mi <- lavaan::inspect(x,"mi")
   mi.order <- mi[order(-mi$mi),]
-  tabla4 <- mi.order[1:mi.nrows,] %>%
+  tabla3 <- mi.order[1:mi.nrows,] %>%
     select(Variable_1 = lhs,
            relationship = op,
            Variable_2 = rhs,
            MI = mi)
-  tabla_general <- dplyr::bind_rows(tabla1,tabla2)
-  tabla_general <- as.tbl(tabla_general)
   tabla <- as.tbl(tabla)
+  tabla1 <- as.tbl(tabla1)
+  tabla2 <- as.tbl(tabla2)
   tabla3 <- as.tbl(tabla3)
-  tabla4 <- as.tbl(tabla4)
-  lista_general <- list(tabla,tabla_general,
-                        tabla3, tabla4)
+  lista_general <- list(tabla,tabla1, tabla2, tabla3)
   lista_general
 }
+
 
 #' Table of reliability coeficientes for Mcdonald's Omega
 #'
