@@ -8,6 +8,7 @@
 #' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
 #' Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
 #' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values
+#' I want to thank Rose Hartmann for the code in her web page thank helped me finish one part of the function.
 #' @importFrom dplyr "%>%"
 #' @importFrom dplyr select
 #' @importFrom  dplyr as.tbl
