@@ -1,6 +1,6 @@
-#' Table of overall fit measures for a CFA and SEM models
+#' Table of overall fit measures for a CFA models
 #'
-#' This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a CFA and SEM model.
+#' This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a CFA model.
 #'
 #' @name grafi
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
@@ -54,6 +54,91 @@ grafi <- function(x, mi.nrows = 5) {
   tabla_general <- list(tabla,tabla1,tabla2)
   tabla_general
 }
+
+#'Table of overall fit measures for a SEM models
+#'
+#'This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a SEM model.
+#' @name grafi2
+#' @param x
+#' @param y specify the amount of rows to show in the modification indexes table. The default is 5 rows.
+#' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
+#' Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
+#' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values.
+#' @importFrom dplyr "%>%"
+#' @importFrom dplyr select
+#' @importFrom  dplyr as.tbl
+#' @importFrom dplyr filter
+#' @importFrom parameterEstimates
+#' @author Juan Carlos Saravia
+#' @examples \donttest{grafi(fit)}
+#' @export
+#'
+#'
+#'
+globalVariables (c("indices", "rhs", "se",
+                   "z", "pvalue", "std.all"))
+grafi2 <- function(x, mi.nrows = 5) {
+  tabla <- data.frame(lavaan::fitMeasures(x))
+  colnames(tabla)[1] <- "Fit Measures"
+  names <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr")
+  tabla$indices <- rownames(tabla)
+  tabla <- tabla %>%
+    filter(indices %in% names)
+  tabla$indices <-  dplyr::recode(tabla$indices,
+                                  chisq = "Chi2",
+                                  df = "df",
+                                  pvalue = "sig",
+                                  cfi = "CFI",
+                                  tli = "TLI",
+                                  rmsea = "RMSEA",
+                                  srmr = "SRMR")
+  tabla <- tabla[,c(2,1)]
+  tabla1 <- parameterEstimates(x, standardized=TRUE) %>%
+    filter(op == "~" ) %>%
+    select('Dependent variable'=lhs,
+           'Independent variable'=rhs,
+           B=est,
+           SE=se,
+           Z=z,
+           'p-value'=pvalue,
+           Beta=std.all)
+  tabla2 <- parameterEstimates(x, standardized=TRUE) %>%
+    filter(op == "~~") %>%
+    select('Dependent variable'=lhs,
+           'Independent variable'=rhs,
+           B=est,
+           SE=se,
+           Z=z,
+           'p-value'=pvalue,
+           Beta=std.all)
+  tabla3 <- parameterEstimates(x, standardized=TRUE) %>%
+    filter(op == "=~") %>%
+    select('Dependent variable'=lhs,
+           'Independent variable'=rhs,
+           B=est,
+           SE=se,
+           Z=z,
+           'p-value'=pvalue,
+           Beta=std.all)
+  mi <- lavaan::inspect(x,"mi")
+  mi.order <- mi[order(-mi$mi),]
+  tabla4 <- mi.order[1:mi.nrows,] %>%
+    select(Variable_1 = lhs,
+           relationship = op,
+           Variable_2 = rhs,
+           MI = mi)
+  tabla_general <- dplyr::bind_rows(tabla1,tabla2,tabla3)
+  tabla_general <- as.tbl(tabla_general)
+  tabla <- as.tbl(tabla)
+  tabla4 <- as.tbl(tabla4)
+  lista_general <- list(tabla,tabla_general, tabla4)
+  lista_general
+}
+
+
+
+
+
 
 #' Table of reliability coeficientes for Mcdonald's Omega
 #'
