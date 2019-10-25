@@ -8,5 +8,7 @@ This package has 4 functions. One function calculates the Composite reliability 
 
 - grafi: This function has its name for one of my cats. It helps organize the lavaan results from CFA models. It gives a list of 3 data frames: model fir indexes, model estimators and modification indexes. 
 
+-grafi2: This function has its name for one of my cats. It helps organize the lavaan results from SEM models. It gives a list of 3 data frames: model fir indexes, model estimators and modification indexes.
+
 - blue: This function is called for my other cat. It helps organize information about reliability and organize the output of McDonald's Omega reliability index. 
 

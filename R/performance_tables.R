@@ -4,14 +4,14 @@
 #'
 #' @name grafi
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
-#' @param y specify the amount of rows to show in the modification indexes table. The default is 5 rows.
+#' @param mi.nrows specify the amount of rows to show in the modification indexes table. The default is 5 rows.
 #' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
 #' Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
 #' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values
 #' I want to thank Rose Hartmann for the code in her web page thank helped me finish one part of the function.
 #' @importFrom dplyr "%>%"
 #' @importFrom dplyr select
-#' @importFrom  dplyr as.tbl
+#' @importFrom dplyr as.tbl
 #' @author Juan Carlos Saravia
 #' @examples \donttest{grafi(fit)}
 #' @export
@@ -59,18 +59,18 @@ grafi <- function(x, mi.nrows = 5) {
 #'
 #'This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a SEM model.
 #' @name grafi2
-#' @param x
-#' @param y specify the amount of rows to show in the modification indexes table. The default is 5 rows.
+#' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
+#' @param mi.nrows specify the amount of rows to show in the modification indexes table. The default is 5 rows.
 #' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
 #' Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
 #' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values.
 #' @importFrom dplyr "%>%"
 #' @importFrom dplyr select
-#' @importFrom  dplyr as.tbl
+#' @importFrom dplyr as.tbl
 #' @importFrom dplyr filter
-#' @importFrom parameterEstimates
+#' @importFrom lavaan parameterEstimates
 #' @author Juan Carlos Saravia
-#' @examples \donttest{grafi(fit)}
+#' @examples \donttest{grafi2(fit)}
 #' @export
 #'
 #'
