@@ -18,7 +18,7 @@
 #'
 globalVariables (c("indices", "rhs", "se",
                 "z", "pvalue", "std.all"))
-grafi <- function(x, y = 5) {
+grafi <- function(x, mi.nrows = 5) {
   tabla <- data.frame(lavaan::fitMeasures(x))
   colnames(tabla)[1] <- "Fit Measures"
   names <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr")
@@ -43,7 +43,7 @@ grafi <- function(x, y = 5) {
            Beta=std.all)
   mi <- lavaan::inspect(x,"mi")
   mi.order <- mi[order(-mi$mi),]
-  tabla2 <- mi.order[1:y,] %>%
+  tabla2 <- mi.order[1:mi.nrows,] %>%
     select(Variable_1 = lhs,
            relationship = op,
            Variable_2 = rhs,

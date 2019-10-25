@@ -12,6 +12,7 @@
 The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
 Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
 Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values
+I want to thank Rose Hartmann for the code in her web page thank helped me finish one part of the function.
 }
 \description{
 This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a CFA and SEM model.
