@@ -7,8 +7,9 @@
 \item{x}{lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.}
 }
 \value{
-The output is a data.frame that gives you overall fit indices for CFA and SEM models.
-For example: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
+The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
+Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
+Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values
 }
 \description{
 This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a CFA and SEM model.

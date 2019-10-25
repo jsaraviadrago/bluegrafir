@@ -4,15 +4,18 @@
 #'
 #' @name grafi
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
-#' @return The output is a data.frame that gives you overall fit indices for CFA and SEM models.
-#' For example: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
+#' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA models.
+#' Example of fit indices: Chi square, degrees of freedom, p-values of Chi square, CFI, TLI, RMSEA, SRMR.
+#' Example of parameter estimates: undstandardized betas, standardized betas, standard error, z values and p values
 #' @importFrom dplyr "%>%"
+#' @importFrom dplyr select
 #' @author Juan Carlos Saravia
 #' @examples \donttest{grafi(fit)}
 #' @export
 #'
-globalVariables("indices")
-grafi <- function(x) {
+globalVariables (c("indices", "rhs", "se",
+                "z", "pvalue", "std.all"))
+grafi <- function(x, y = 5) {
   tabla <- data.frame(lavaan::fitMeasures(x))
   colnames(tabla)[1] <- "Fit Measures"
   names <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr")
@@ -28,7 +31,22 @@ grafi <- function(x) {
                            rmsea = "RMSEA",
                            srmr = "SRMR")
   tabla <- tabla[,c(2,1)]
-  tabla
+  tabla1 <- lavaan::parameterEstimates(x, standardized=TRUE) %>%
+    filter(op == "=~") %>%
+    select('Latent Factor'=lhs,
+           Indicator=rhs, B=est,
+           SE=se, Z=z,
+           'p-value'=pvalue,
+           Beta=std.all)
+  mi <- lavaan::inspect(x,"mi")
+  mi.order <- mi[order(-mi$mi),]
+  tabla2 <- mi.order[1:y,] %>%
+    select(Variable = lhs,
+           relationship = op,
+           Variable = rhs,
+           MI = mi)
+  tabla_general <- list(tabla,tabla1,tabla2)
+  tabla_general
 }
 
 #' Table of reliability coeficientes for Mcdonald's Omega
@@ -77,6 +95,7 @@ blue <- function(x) {
     dplyr::summarise(Omega = mean(Omega))
   factors
 }
+
 
 
 
