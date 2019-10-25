@@ -37,7 +37,7 @@ grafi <- function(x, mi.nrows = 5) {
   tabla1 <- lavaan::parameterEstimates(x, standardized=TRUE) %>%
     filter(op == "=~") %>%
     select('Latent Factor'=lhs,
-           Indicator=rhs, B=est,
+           Variable=rhs, B=est,
            SE=se, Z=z,
            'p-value'=pvalue,
            Beta=std.all)
@@ -95,8 +95,9 @@ grafi2 <- function(x, mi.nrows = 5) {
   tabla <- tabla[,c(2,1)]
   tabla1 <- parameterEstimates(x, standardized=TRUE) %>%
     filter(op == "~" ) %>%
-    select('Dependent variable'=lhs,
-           'Independent variable'=rhs,
+    select('Dep variable'=lhs,
+           Relationship=op,
+           'Ind variable'=rhs,
            B=est,
            SE=se,
            Z=z,
@@ -104,8 +105,9 @@ grafi2 <- function(x, mi.nrows = 5) {
            Beta=std.all)
   tabla2 <- parameterEstimates(x, standardized=TRUE) %>%
     filter(op == "~~") %>%
-    select('Dependent variable'=lhs,
-           'Independent variable'=rhs,
+    select('Dep variable'=lhs,
+           Relationship=op,
+           'Ind variable'=rhs,
            B=est,
            SE=se,
            Z=z,
@@ -113,8 +115,8 @@ grafi2 <- function(x, mi.nrows = 5) {
            Beta=std.all)
   tabla3 <- parameterEstimates(x, standardized=TRUE) %>%
     filter(op == "=~") %>%
-    select('Dependent variable'=lhs,
-           'Independent variable'=rhs,
+    select('Latent factor'=lhs,
+           'Variable'=rhs,
            B=est,
            SE=se,
            Z=z,
@@ -127,18 +129,15 @@ grafi2 <- function(x, mi.nrows = 5) {
            relationship = op,
            Variable_2 = rhs,
            MI = mi)
-  tabla_general <- dplyr::bind_rows(tabla1,tabla2,tabla3)
+  tabla_general <- dplyr::bind_rows(tabla1,tabla2)
   tabla_general <- as.tbl(tabla_general)
   tabla <- as.tbl(tabla)
+  tabla3 <- as.tbl(tabla3)
   tabla4 <- as.tbl(tabla4)
-  lista_general <- list(tabla,tabla_general, tabla4)
+  lista_general <- list(tabla,tabla_general,
+                        tabla3, tabla4)
   lista_general
 }
-
-
-
-
-
 
 #' Table of reliability coeficientes for Mcdonald's Omega
 #'
