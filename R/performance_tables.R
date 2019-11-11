@@ -24,18 +24,36 @@ globalVariables (c("indices", "rhs", "se",
 grafi <- function(x, mi.nrows = 5) {
   tabla <- data.frame(lavaan::fitMeasures(x))
   colnames(tabla)[1] <- "Fit Measures"
-  names <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr")
+  names <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr",
+             "chisq.scaled", "df.scaled",
+             "pvalue.scaled", "cfi.scaled",
+             "tli.scaled", "rmsea.scaled")
   tabla$indices <- rownames(tabla)
   tabla <- tabla %>%
     filter(indices %in% names)
-  tabla$indices <-  dplyr::recode(tabla$indices,
-                                  chisq = "Chi2",
-                                  df = "df",
-                                  pvalue = "sig",
-                                  cfi = "CFI",
-                                  tli = "TLI",
-                                  rmsea = "RMSEA",
-                                  srmr = "SRMR")
+  estimador <- nrow(tabla)
+  names2 <- c("Chi2", "DF", "P-VALUE", "CFI", "TLI", "RMSEA", "SRMR")
+  if (estimador == 7) {
+    tabla$indices <-  dplyr::recode(tabla$indices,
+                                    chisq = "Chi2",
+                                    df = "DF",
+                                    pvalue = "P-VALUE",
+                                    cfi = "CFI",
+                                    tli = "TLI",
+                                    rmsea = "RMSEA",
+                                    srmr = "SRMR")
+  } else {
+    tabla$indices <-  dplyr::recode(tabla$indices,
+                                    chisq.scaled = "Chi2",
+                                    df.scaled = "DF",
+                                    pvalue.scaled = "P-VALUE",
+                                    cfi.scaled = "CFI",
+                                    tli.scaled = "TLI",
+                                    rmsea.scaled = "RMSEA",
+                                    srmr = "SRMR")
+    tabla <- tabla %>%
+      filter(indices %in% names2)
+  }
   tabla <- tabla[,c(2,1)]
   analysis <- c("~", "~~", ":=")
   tabla1 <- parameterEstimates(x, standardized=TRUE) %>%
