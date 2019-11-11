@@ -12,6 +12,7 @@
 #' @importFrom dplyr select
 #' @importFrom dplyr as.tbl
 #' @importFrom dplyr filter
+#' @importFrom dplyr recode
 #' @importFrom lavaan parameterEstimates
 #' @author Juan Carlos Saravia
 #' @examples \donttest{grafi2(fit)}
@@ -34,7 +35,7 @@ grafi <- function(x, mi.nrows = 5) {
   estimador <- nrow(tabla)
   names2 <- c("Chi2", "DF", "P-VALUE", "CFI", "TLI", "RMSEA", "SRMR")
   if (estimador == 7) {
-    tabla$indices <-  dplyr::recode(tabla$indices,
+    tabla$indices <-  recode(tabla$indices,
                                     chisq = "Chi2",
                                     df = "DF",
                                     pvalue = "P-VALUE",
@@ -43,7 +44,7 @@ grafi <- function(x, mi.nrows = 5) {
                                     rmsea = "RMSEA",
                                     srmr = "SRMR")
   } else {
-    tabla$indices <-  dplyr::recode(tabla$indices,
+    tabla$indices <-  recode(tabla$indices,
                                     chisq.scaled = "Chi2",
                                     df.scaled = "DF",
                                     pvalue.scaled = "P-VALUE",
