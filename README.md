@@ -10,6 +10,8 @@ This package has 4 functions. One function calculates the Composite reliability 
 
 - grafi2: This function is called for my cat. It helps organize information about reliability and organize the output of McDonald's Omega reliability index. 
 
+- grafi3: This is function is called for my cat. It helps organize information by setting a nice table of frequencies, proportions and cumulative frequencies from categories. 
+
 - blue: This function is called for my other cat. It helps transform a vector into a more intrepetable value with a mean 500 and a standard deviation of 100. The function first standardizes with mean 0 and standard deviation 1, afterwards it makes a linear transformation the default are the values previously mentioned but it is possible to set any value.
 
 - blue2: This function is called for my other cat. It helps transform a vector into a more intrepetable value with a mean 500 and a standard deviation of 100. But it uses the mean and the standard deviation of a baseline measurement you have to set. It helps compare a recent measurement against the baseline. It is commonly used to compare measurements through out the years. Both vectors need to be in the same scale in order for the transformation to have a correct interpretation. 
