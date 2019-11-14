@@ -1,4 +1,4 @@
-### Package with psychometric tools
+# Package with psychometric tools
 
 ## Nice tables with fit indices, reliability and item description
 
@@ -14,7 +14,7 @@
 
 - ave: This function calculates Average variance extracted (AVE) and it is also based on Raykov's paper (Raykov, T. (2004). Behavioral scale realiability and measurement invariance evaluation using latent variable modeling. Behavior therapy, 35, 299-331).
 
-## Calculaton of linear and none linear transformations to compare multiple measuremente between groups and through time
+## Calculation of linear and none linear transformations to compare multiple measuremente between groups and through time
 
 
 - blue: This function is called for my other cat. It helps transform a vector into a more intrepetable value with a mean 500 and a standard deviation of 100. The function first standardizes with mean 0 and standard deviation 1, afterwards it makes a linear transformation the default are the values previously mentioned but it is possible to set any value.
