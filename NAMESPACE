@@ -2,8 +2,10 @@
 
 export(ave)
 export(blue)
+export(blue2)
 export(crel)
 export(grafi)
+export(grafi2)
 importFrom(dplyr,"%>%")
 importFrom(dplyr,as.tbl)
 importFrom(dplyr,filter)

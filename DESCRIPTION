@@ -16,4 +16,4 @@ Imports:
 	 GPArotation  	(>= 2014.11-1),
 	 lavaan (>= 0.6-4),
 	 psych (>= 1.8.12)
-RoxygenNote: 6.1.1.9000
+RoxygenNote: 7.0.0

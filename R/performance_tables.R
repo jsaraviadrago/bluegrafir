@@ -96,17 +96,17 @@ grafi <- function(x, mi.nrows = 5) {
 #'
 #' This function needs a psych and GPArotation object from the omegaSem function to work. It creates a table of all fit indices for a CFA and SEM model.
 #'
-#' @name blue
+#' @name grafi2
 #' @param x McDonalds Omega calculated with the omegaSem function. The name of the McDonald's Omega specified with the psych and GPArotation packages.
 #' @return The output is a data.frame that gives you fit McDonalds Omega coefficients in a table.
 #' @importFrom dplyr "%>%"
 #' @importFrom dplyr select
 #' @author Juan Carlos Saravia
-#' @examples \donttest{blue(fit)}
+#' @examples \donttest{grafi2(fit)}
 #' @export
 globalVariables(c("total", "omegarel", "varmax",
                   "Factor", "Omega"))
-blue <- function(x) {
+grafi2 <- function(x) {
   # Extracting Omega reliability coeficients
   omegacoef <- data.frame(x$omegaSem$omega.group)
   factor.names <- rownames(omegacoef)
