@@ -33,3 +33,4 @@ blue2 <- function(lmes, parfmean, parfsd,
   equate <- (lmes-parfmean)/parfsd
   conversion <- (equate*sdvar)+meanvar
 }
+

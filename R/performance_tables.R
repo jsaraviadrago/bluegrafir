@@ -140,6 +140,30 @@ grafi2 <- function(x) {
 }
 
 
-
-
+#' Table of distributions of categories in a vector
+#'
+#' This function just needs a vector and it is useful if you want to make a tidy table of distributions of items. It works with the map function from the purrr package which enables you to calculate multiple ordered tables of items.
+#'
+#' @name grafi3
+#' @param y vector of values that show a table of frequencies, proportions and cumulative frequencies.
+#' @return a tibble of 4 columns with categories, frequencies, proportions and cumulative frequencies.
+#' @importFrom dplyr "%>%"
+#' @author Juan Carlos Saravia
+#' @examples \donttest{grafi3(x)}
+#' @export
+#'
+#'
+globalVariables(c("Freq.x", "Freq.y", "x",
+                  "Frequencies"))
+grafi3 <- function(y) {
+  freq <- data.frame(table(y))
+  prop <- data.frame(prop.table(table(y)))
+  tabla <- dplyr::left_join(freq,prop, by = "x")
+  tabla <- tabla %>%
+    dplyr::select(Categories = x,
+           Frequencies = Freq.x,
+           Proportions = Freq.y)
+  tabla <- transform(tabla, CumFreq = cumsum(Frequencies))
+  tabla <- dplyr::as.tbl(tabla)
+}
 
