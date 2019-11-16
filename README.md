@@ -1,5 +1,8 @@
 # Bluegrafir: Package with psychometric tools
 
+`install_github("jsaraviadrago/bluegrafi")`
+`library(bluegrafir)`
+
 ## Nice tables with fit indices, reliability and item description
 
 - grafit: This function has its name for one of my cats. It helps organize the lavaan results from CFA or SEM models. It gives a list of 3 data frames: model fit indexes, model estimators and modification indexes. 
