@@ -165,5 +165,6 @@ graficat <- function(x) {
            Proportions = Freq.y)
   tabla <- transform(tabla, CumFreq = cumsum(Frequencies))
   tabla <- dplyr::as.tbl(tabla)
+  tabla
 }
 
