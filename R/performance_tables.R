@@ -167,4 +167,3 @@ graficat <- function(x) {
   tabla <- dplyr::as.tbl(tabla)
   tabla
 }
-
