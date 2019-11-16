@@ -21,7 +21,7 @@
 
 - bluecomp: This function is called for my other cat. It helps transform a vector into a more intrepetable value with a mean 500 and a standard deviation of 100. But it uses the mean and the standard deviation of a baseline measurement you have to set. It helps compare a recent measurement against the baseline. It is commonly used to compare measurements through out the years. Both vectors need to be in the same scale in order for the transformation to have a correct interpretation.
 
-- bluebare:
+- bluebare: it is a function to calculate percentile scaling to calculate thresholds of continous variables. It uses the cumulative frequency of the ordered raw scores and calculates standard values (Zscores). Thresholds seperate three groups, "low", which are values with 1 standard deviation below the mean, "medium" are values with a standard deviation between -1 and 1 standard deviations and "high" which are values with 1 standard deviation over the mean.  
 
 
 
