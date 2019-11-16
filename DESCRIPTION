@@ -1,12 +1,12 @@
-Package: bluegrafi
+Package: bluegrafir
 Type: Package
-Title: Psychometric properties for SEM models 
+Title: Psychometric tools for structural equation models and scale comparisons
 Version: 0.2.0
 Author@R: person("Juan Carlos", "Saravia", email = "jsaraviadrago@gmail.com",
 	role = c("aut", "cre"))
 Author: Juan Carlos Saravia <jsaraviadrago@gmail.com>
 Maintainer: Juan Carlos Saravia <jsaraviadrago@gmail.com>
-Description: An implementation of tidy tables for Structural equation modelling, Confirmatory factor analysis (CFA) and average variance error and composite reliability for CFA. 
+Description: An implementation of linear transformations and tidy tables for Structural equation modelling, Confirmatory factor analysis (CFA) and average variance error and composite reliability for CFA. 
 License: MIT + file LICENSE
 URL: https://github.com/jsaraviadrago/bluegrafi
 Encoding: UTF-8

@@ -1,4 +1,4 @@
-# Package with psychometric tools
+# Bluegrafir: Package with psychometric tools
 
 ## Nice tables with fit indices, reliability and item description
 
