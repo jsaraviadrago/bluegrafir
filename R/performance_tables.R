@@ -155,9 +155,9 @@ grafirel <- function(x) {
 #'
 globalVariables(c("Freq.x", "Freq.y", "x",
                   "Frequencies"))
-graficat <- function(y) {
-  freq <- data.frame(table(y))
-  prop <- data.frame(prop.table(table(y)))
+graficat <- function(x) {
+  freq <- data.frame(table(x))
+  prop <- data.frame(prop.table(table(x)))
   tabla <- dplyr::left_join(freq,prop, by = "x")
   tabla <- tabla %>%
     dplyr::select(Categories = x,
