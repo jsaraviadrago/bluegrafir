@@ -83,7 +83,7 @@ crel <- function(x) {
 #' This function needs a lavaan object with a model fit to work. It calculates the Average variance extracted for CFA models.
 #' It is the average of the squared standardized pattern coefficients for indicators that depend on the same factor but are specified to measure no other factors.
 #'
-#' @name ave
+#' @name avex
 #' @seealso Kline, R. (2016). Principles and Practice of Structural Equation Modeling. Fourth Edition. Guilford press. NY.
 #' @seealso Raykov, T. (2004). Behavioral scale realiability and measurement invariance evaluation using latent variable modeling. Behavior therapy, 35, 299-331.
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
@@ -95,7 +95,7 @@ crel <- function(x) {
 #' @examples \donttest{ave(fit)}
 #' @export
 globalVariables(c("op", "lhs", "AVE"))
-ave <- function(x) {
+avex <- function(x) {
   # Extracting distribution of items per factor
   z<- lavaan::parameterEstimates(x)
   z <- z[,1:3]

@@ -34,3 +34,64 @@ blue2 <- function(lmes, parfmean, parfsd,
   conversion <- (equate*sdvar)+meanvar
 }
 
+#' This function can be used to do linear percentile scaling. It helps to create thresholds for surveys and continous variables.
+#'
+#'It calculates the cumulative frequency of a continous variable, transforms this variable into percentiles by using a constant of .50 in order to calculate values over the 50% and under it based on the frequency of values.
+#' After that, it standardize scores and then transforms values with a mean of 500 and standard deviation of 100 (default).
+#' @name bluebare
+#' @param x vector of continous values
+#' @param sdev standard deviation which is to be assigned for the transformation, default value is 100.
+#' @param means mean which is to be assigned for the linear transformation. Default value is 500.
+#' @param threshold logical parameter were TRUE assigns three thresholds. It is based on a normal distribution were values lower than -1 standard deviation from the mean are low, values higher than 1 standard deviation are high and values in between are medium (default).
+#' if logical parameter is FALSE, 5 thresholds are assigned where values bigger than 2 standard deviations are very high, higher than 1 standard deviation are high, higher than -1 are medium, higher than -2 are low and lower than -2 standard deviations are very low.
+#' @return The output is a tibble with raw scores, zscores and thresholds
+#' @importFrom dplyr mutate
+#' @importFrom dplyr case_when
+#' @importFrom dplyr select
+#' @author Juan Carlos Saravia
+#' @examples \donttest{bluebare(x,sdev,means,threshold)}
+#' @export
+globalVariables (c("Var1", "Zscore", "cortes",
+                   "z", "pvalue", "std.all"))
+bluebare <- function(x, sdev = 100, means = 500, threshold = TRUE){
+  order.freq <- data.frame(table(x))
+  order.freq$CumFreq <- cumsum(order.freq$Freq)
+  val1 <- data.frame((0.5*order.freq$Freq)/(sum(order.freq$Freq))*100)
+  val1 <- val1[1,]
+  order.freq$RP <- NA
+  order.freq[1,4] <- val1
+  freqrp <-  c(order.freq[2:nrow(order.freq),2],0)
+  order.freq$freqrp <- freqrp
+
+  order.freq$RPcalc <- (order.freq$CumFreq + 0.5*order.freq$freqrp)/(sum(order.freq$Freq))*100
+  dimminus <- nrow(order.freq)-1
+  RPcalc <- order.freq$RPcalc[1:dimminus]
+  order.freq[2:nrow(order.freq),4] <-  RPcalc
+  order.freq <- order.freq %>%
+    select(-freqrp, -RPcalc)
+  order.freq$RPdiv100 <- order.freq$RP/100
+  order.freq$Zscore <- scale(order.freq$RPdiv100,
+                             center = T,
+                             scale = T)
+  order.freq$Tscore <- order.freq$z*sdev+means
+  if (threshold == TRUE) {
+    order.freq <- order.freq %>% mutate(
+      cortes = case_when(
+        Zscore > 1 ~ "Alto",
+        Zscore > -1 ~ "Medio",
+        TRUE ~ "Bajo"))
+  } else {
+    order.freq <- order.freq %>% mutate(
+      cortes = case_when(
+        Zscore > 2 ~ "Muy alto",
+        Zscore > 1 ~ "Alto",
+        Zscore > -1 ~ "Medio",
+        Zscore > -2 ~ "Bajo",
+        TRUE ~ "Muy bajo"))
+  }
+  baremos <- order.freq %>%
+    select(Puntajes_Brutos = Var1,
+           Zscores = Zscore,
+           Threshold = cortes)
+  baremos <- dplyr::as.tbl(baremos)
+}

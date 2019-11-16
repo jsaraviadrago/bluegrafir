@@ -1,7 +1,7 @@
 #'Table of overall fit measures for a CFA and SEM models
 #'
 #'This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a SEM model.
-#' @name grafi
+#' @name grafit
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA or SEM model in the lavaan package.
 #' @param mi.nrows specify the amount of rows to show in the modification indexes table. The default is 5 rows.
 #' @return The output is a list of tibbles that gives you overall fit indices, parameter estimates and modification indices for CFA or SEM models.
@@ -22,7 +22,7 @@
 #'
 globalVariables (c("indices", "rhs", "se",
                    "z", "pvalue", "std.all"))
-grafi <- function(x, mi.nrows = 5) {
+grafit <- function(x, mi.nrows = 5) {
   tabla <- data.frame(lavaan::fitMeasures(x))
   colnames(tabla)[1] <- "Fit Measures"
   names <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr",
@@ -96,7 +96,7 @@ grafi <- function(x, mi.nrows = 5) {
 #'
 #' This function needs a psych and GPArotation object from the omegaSem function to work. It creates a table of all fit indices for a CFA and SEM model.
 #'
-#' @name grafi2
+#' @name grafirel
 #' @param x McDonalds Omega calculated with the omegaSem function. The name of the McDonald's Omega specified with the psych and GPArotation packages.
 #' @return The output is a data.frame that gives you fit McDonalds Omega coefficients in a table.
 #' @importFrom dplyr "%>%"
@@ -106,7 +106,7 @@ grafi <- function(x, mi.nrows = 5) {
 #' @export
 globalVariables(c("total", "omegarel", "varmax",
                   "Factor", "Omega"))
-grafi2 <- function(x) {
+grafirel <- function(x) {
   # Extracting Omega reliability coeficients
   omegacoef <- data.frame(x$omegaSem$omega.group)
   factor.names <- rownames(omegacoef)
@@ -144,7 +144,7 @@ grafi2 <- function(x) {
 #'
 #' This function just needs a vector and it is useful if you want to make a tidy table of distributions of items. It works with the map function from the purrr package which enables you to calculate multiple ordered tables of items.
 #'
-#' @name grafi3
+#' @name graficat
 #' @param y vector of values that show a table of frequencies, proportions and cumulative frequencies.
 #' @return a tibble of 4 columns with categories, frequencies, proportions and cumulative frequencies.
 #' @importFrom dplyr "%>%"
@@ -155,7 +155,7 @@ grafi2 <- function(x) {
 #'
 globalVariables(c("Freq.x", "Freq.y", "x",
                   "Frequencies"))
-grafi3 <- function(y) {
+graficat <- function(y) {
   freq <- data.frame(table(y))
   prop <- data.frame(prop.table(table(y)))
   tabla <- dplyr::left_join(freq,prop, by = "x")
