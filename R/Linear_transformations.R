@@ -51,8 +51,9 @@ bluecomp <- function(lmes, parfmean, parfsd,
 #' @author Juan Carlos Saravia
 #' @examples \donttest{bluebare(x,sdev,means,threshold)}
 #' @export
-globalVariables (c("Var1", "Zscore", "cortes",
-                   "z", "pvalue", "std.all"))
+globalVariables (c("x", "Zscore", "cortes",
+                   "Z", "pvalue", "std.all",
+                   "Puntajes_Brutos", "Threshold"))
 bluebare <- function(x, sdev = 100, means = 500, threshold = TRUE){
   order.freq <- data.frame(table(x))
   order.freq$CumFreq <- cumsum(order.freq$Freq)
@@ -62,18 +63,20 @@ bluebare <- function(x, sdev = 100, means = 500, threshold = TRUE){
   order.freq[1,4] <- val1
   freqrp <-  c(order.freq[2:nrow(order.freq),2],0)
   order.freq$freqrp <- freqrp
-
   order.freq$RPcalc <- (order.freq$CumFreq + 0.5*order.freq$freqrp)/(sum(order.freq$Freq))*100
   dimminus <- nrow(order.freq)-1
   RPcalc <- order.freq$RPcalc[1:dimminus]
   order.freq[2:nrow(order.freq),4] <-  RPcalc
   order.freq <- order.freq %>%
     select(-freqrp, -RPcalc)
-  order.freq$RPdiv100 <- order.freq$RP/100
+  order.freq
+  order.freq$RPdiv100 <- (order.freq$RP)/100
+
   order.freq$Zscore <- scale(order.freq$RPdiv100,
                              center = T,
                              scale = T)
-  order.freq$Tscore <- order.freq$z*sdev+means
+  order.freq$Tscore <- ((order.freq$Zscore)*sdev)+means
+
   if (threshold == TRUE) {
     order.freq <- order.freq %>% mutate(
       cortes = case_when(
@@ -90,8 +93,15 @@ bluebare <- function(x, sdev = 100, means = 500, threshold = TRUE){
         TRUE ~ "Muy bajo"))
   }
   baremos <- order.freq %>%
-    select(Puntajes_Brutos = Var1,
-           Zscores = Zscore,
+    select(Puntajes_Brutos = x,
+           Z = Zscore,
            Threshold = cortes)
   baremos <- dplyr::as.tbl(baremos)
+  summarytab <- baremos %>%
+    dplyr::group_by(Threshold) %>%
+    dplyr::summarise(MinPB = dplyr::first(Puntajes_Brutos),
+              MaxPB = dplyr::last(Puntajes_Brutos),
+              MinZ = min(Z, na.rm = T),
+              MaxZ = max(Z, na.rm = T))
+  list(baremos,summarytab)
 }
