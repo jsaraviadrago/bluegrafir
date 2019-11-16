@@ -1,6 +1,7 @@
 # Bluegrafir: Package with psychometric tools
 
-`install_github("jsaraviadrago/bluegrafi")`
+`install_github("jsaraviadrago/bluegrafir")`
+
 `library(bluegrafir)`
 
 ## Nice tables with fit indices, reliability and item description
