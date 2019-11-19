@@ -5,7 +5,7 @@
 
 # **bluegrafir** 
 
-The goal of `bluegrafir` is handle useful psychometric tools for for structural equation modelling and measurement comparison. 
+The goal of `bluegrafir` is handle useful psychometric tools for structural equation modelling and measurement comparison. 
 
 **blue** and **grafi** are the main starting pieces of every function. Calculations do not have a specific begining. 
 
