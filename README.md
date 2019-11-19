@@ -1,5 +1,5 @@
 
-<img src="images/bluegrafir.PNG" style="width:25%; margin-right: 20px" align="right">
+<img src="bluegrafir.PNG" style="width:25%; margin-right: 20px" align="right">
 
 # Bluegrafir: Package with psychometric tools
 
