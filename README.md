@@ -1,7 +1,18 @@
 
-<img src="bluegrafir.PNG" style="width:15%; margin-right: 20px" align="right">
 
-# Bluegrafir: Package with psychometric tools
+
+<img align="right" width="200" height="200" src="bluegrafir.PNG">
+
+# **bluegrafir** 
+
+The goal of `bluegrafir` is handle useful psychometric tools for for structural equation modelling and measurement comparison. 
+
+**blue** and **grafi** are the main starting pieces of every function. Calculations do not have a specific begining. 
+
+- _blue_ are used for linear tranformations. 
+- _grafi_ are used for tidy tables of model fit and reliability for structural equation modelling. 
+
+## **Instalation**
 
 `install_github("jsaraviadrago/bluegrafir")`
 
