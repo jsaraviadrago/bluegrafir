@@ -7,12 +7,13 @@
 
 The goal of `bluegrafir` is to handle useful psychometric tools for structural equation modelling and measurement comparison. 
 
-**blue** and **grafi** are the main starting pieces of every function and are named after my cats. Calculations do not have a specific begining. 
+**blue** and **grafi** are the main starting pieces of every function and are named after my cats. Other types of functions that require calculations do not have a specific begining. 
 
-- _blue_ functions are used for linear tranformations. 
-- _grafi_ functions are used for tidy tables of model fit and reliability for structural equation modelling. 
+> _blue_ functions are used for linear tranformations. 
+>
+> _grafi_ functions are used for tidy tables of model fit and reliability for structural equation modelling. 
 
-## _blue_
+### _blue_
 
 
 - **bluebase**: This function helps transform a vector into a more intrepetable value. It performs a standarization of a continous variable, therefore it has a mean 0 and standard deviation 1 (Z scores). Afterwards with another linear transformation it sets the continous variable in points of standard deviations. With a mean of 500 and a standard deviation of 100 (default).
@@ -21,7 +22,7 @@ The goal of `bluegrafir` is to handle useful psychometric tools for structural e
 
 - **bluebare**: This function does percentile scaling to calculate thresholds of continous variables. It uses the cumulative frequency of the ordered raw scores and calculates standardized values (Z scores). Thresholds seperate three groups, "low", which are values with 1 standard deviation below the mean, "medium" are values with a standard deviation between -1 and 1 standard deviations and "high" which are values with 1 standard deviation over the mean.  
 
-## _grafi_
+### _grafi_
 
 - **grafit**: This function helps organize the  results from the lavaan package of Confirmatory factor analysis (CFA) or Structural equation models (SEM). It gives a list of 3 data frames: model fit indexes, model estimators and modification indexes. 
 
@@ -29,7 +30,7 @@ The goal of `bluegrafir` is to handle useful psychometric tools for structural e
 
 - **graficat**: This function helps organize information by setting a nice table of frequencies, proportions and cumulative frequencies from categorical variables. 
 
-## _crel_ and _avex_
+### _crel_ and _avex_
 
 - **crel**: This function calculates Composite reliability and it is based on the formulas in Raykov, T. (2004). Behavioral scale realiability and measurement invariance evaluation using latent variable modeling. Behavior therapy, 35, 299-331.
 
