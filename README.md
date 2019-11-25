@@ -3,6 +3,10 @@
 
 <img align="right" width="200" height="200" src="bluegrafir.PNG">
 
+  <!-- badges: start -->
+  [![Travis build status](https://travis-ci.org/jsaraviadrago/bluegrafi.svg?branch=master)](https://travis-ci.org/jsaraviadrago/bluegrafi)
+  <!-- badges: end -->
+
 # **bluegrafir** 
 
 The goal of `bluegrafir` is to handle useful psychometric tools for structural equation modelling and measurement comparison. 
