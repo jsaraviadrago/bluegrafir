@@ -17,3 +17,5 @@ Imports:
 	 lavaan (>= 0.6-4),
 	 psych (>= 1.8.12)
 RoxygenNote: 7.0.0
+Suggests: 
+    testthat (>= 2.1.0)
