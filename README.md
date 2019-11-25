@@ -5,7 +5,9 @@
 
 # **bluegrafir** 
 
-
+  <!-- badges: start -->
+  [![Codecov test coverage](https://codecov.io/gh/jsaraviadrago/bluegrafi/branch/master/graph/badge.svg)](https://codecov.io/gh/jsaraviadrago/bluegrafi?branch=master)
+  <!-- badges: end -->
 
 The goal of `bluegrafir` is to handle useful psychometric tools for structural equation modelling and measurement comparison. 
 
