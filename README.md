@@ -5,6 +5,10 @@
 
 # **bluegrafir** 
 
+  <!-- badges: start -->
+  [![Codecov test coverage](https://codecov.io/gh/jsaraviadrago/bluegrafi/branch/master/graph/badge.svg)](https://codecov.io/gh/jsaraviadrago/bluegrafi?branch=master)
+  <!-- badges: end -->
+
 The goal of `bluegrafir` is to handle useful psychometric tools for structural equation modelling and measurement comparison. 
 
 **blue** and **grafi** are the main starting pieces of every function and are named after my cats. Other types of functions that require calculations do not have a specific begining. 
