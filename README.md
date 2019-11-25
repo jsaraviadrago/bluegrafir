@@ -5,10 +5,6 @@
 
 # **bluegrafir** 
 
-  <!-- badges: start -->
-  [![Travis build status](https://travis-ci.org/jsaraviadrago/bluegrafir.svg?branch=master)](https://travis-ci.org/jsaraviadrago/bluegrafi)
-  <!-- badges: end -->
-
 The goal of `bluegrafir` is to handle useful psychometric tools for structural equation modelling and measurement comparison. 
 
 **blue** and **grafi** are the main starting pieces of every function and are named after my cats. Other types of functions that require calculations do not have a specific begining. 
