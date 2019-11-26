@@ -6,6 +6,7 @@
 # **bluegrafir** 
 
   <!-- badges: start -->
+    [![Travis build status](https://travis-ci.org/jsaraviadrago/bluegrafir.svg?branch=master)](https://travis-ci.org/jsaraviadrago/bluegrafir)
   [![Codecov test coverage](https://codecov.io/gh/jsaraviadrago/bluegrafir/branch/master/graph/badge.svg)](https://codecov.io/gh/jsaraviadrago/bluegrafir?branch=master)
   <!-- badges: end -->
 
