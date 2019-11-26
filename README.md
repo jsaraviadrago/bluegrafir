@@ -6,9 +6,8 @@
 # **bluegrafir** 
 
   <!-- badges: start -->
-    [![Travis build status](https://travis-ci.org/jsaraviadrago/bluegrafir.svg?branch=master)](https://travis-ci.org/jsaraviadrago/bluegrafir)
-    
-  [![Codecov test coverage](https://codecov.io/gh/jsaraviadrago/bluegrafir/branch/master/graph/badge.svg)](https://codecov.io/gh/jsaraviadrago/bluegrafir?branch=master)
+[![Travis build status](https://travis-ci.org/jsaraviadrago/bluegrafir.svg?branch=master)](https://travis-ci.org/jsaraviadrago/bluegrafir)
+[![Codecov test coverage](https://codecov.io/gh/jsaraviadrago/bluegrafir/branch/master/graph/badge.svg)](https://codecov.io/gh/jsaraviadrago/bluegrafir?branch=master)
   <!-- badges: end -->
 
 The goal of `bluegrafir` is to handle useful psychometric tools for structural equation modelling and measurement comparison. 
