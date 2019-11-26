@@ -7,6 +7,7 @@
 
   <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/jsaraviadrago/bluegrafir.svg?branch=master)](https://travis-ci.org/jsaraviadrago/bluegrafir)
+  [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jsaraviadrago/bluegrafir?branch=master&svg=true)](https://ci.appveyor.com/project/jsaraviadrago/bluegrafir)
 [![Codecov test coverage](https://codecov.io/gh/jsaraviadrago/bluegrafir/branch/master/graph/badge.svg)](https://codecov.io/gh/jsaraviadrago/bluegrafir?branch=master)
   <!-- badges: end -->
 
