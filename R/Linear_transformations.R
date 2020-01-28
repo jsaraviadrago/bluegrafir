@@ -105,3 +105,18 @@ bluebare <- function(x, sdev = 100, means = 500, threshold = TRUE){
               MaxZ = max(Z, na.rm = T))
   list(baremos,summarytab)
 }
+
+#' This functions calculates parameters to equate measurements in a IRT framework
+#'
+#' It calculates mean-mean parameters in order to do a linear transformation of a scale to make it comparable with another one.
+#' The function does the mean-mean transformation for test in a IRT framework, a good reference is:
+#' Kolen, M & Brennan, R. (2014) Test equating, scaling and linking. Methods and practice. Third edition. NY: Springer.
+#' @name bluequate
+#' @param x vector of continous variable that you want to equate
+#' @param y vector of continous variable that you want to equate to. This variable will have the same metric as parameter x.
+#' @return The output is a list of tibbles with the calculated parameters, the items and the difficulty of items of one group and the other. Finally a the plot with control bands to check item displacement.
+#'
+#' @author Juan Carlos Saravia
+#' @examples \donttest{bluequate(x,y, err.x, err.y)}
+#' @export
+
