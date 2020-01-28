@@ -22,7 +22,7 @@ The goal of `bluegrafir` is to handle useful psychometric tools for structural e
 ### _blue_
 
 
-- **bluebase**: This function helps transform a vector into a more intrepetable value. It performs a standarization of a continous variable, therefore it has a mean 0 and standard deviation 1 (Z scores). Afterwards with another linear transformation it sets the continous variable in points of standard deviations. With a mean of 500 and a standard deviation of 100 (default).
+- **bluebase**: This function helps transform a vector into a more intrepetable value. It performs a standarization of a continous variable, therefore it has a mean 0 and standard deviation 1 (Z scores). Afterwards with another linear transformation it sets the continous variable in points of standard deviations. With a mean of 500 and a standard deviation (sd) of 100 (default).
 
 - **bluecomp**: This function helps transform a vector into a more intrepetable value with a mean 500 and a standard deviation of 100. It uses the mean and the standard deviation of a baseline measurement you have to set. It helps compare a recent measurement against the baseline. It is commonly used to compare measurements over the years. Both vectors need to be in the same scale in order for the transformation to have a correct interpretation.
 
