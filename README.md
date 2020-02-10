@@ -1,7 +1,7 @@
 
 
 
-<img align="right" width="200" height="200" src="/home/jsaravia/bluegrafir/images/bluegrafir.PNG">
+<img align="right" width="200" height="200" src="https://github.com/jsaraviadrago/bluegrafir/tree/master/images/bluegrafir.PNG">
 
 # **bluegrafir** 
 
