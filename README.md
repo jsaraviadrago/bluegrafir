@@ -1,7 +1,7 @@
 
 
 
-<img align="right" width="200" height="200" src="bluegrafir.PNG">
+<img align="right" width="200" height="200" src="images/bluegrafir.PNG">
 
 # **bluegrafir** 
 
