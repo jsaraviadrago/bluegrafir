@@ -1,6 +1,8 @@
-## code to prepare `SOC` dataset goes here
-
-#' @title SOC
+#' The SOC dataset or Sense of Coherence
+#'
+#' The outcome is a group of variables and 155 rows that measure Sense of Coherence and its attributes.
+#' According to Antonovsky Sense of Coherence is the capacity to cope with stress.
+#' @title SOC is a dataset that contains a measurements of Sense of Coherence
 #' @description Dataset of a study of Sense of Coherence (SOC) in a Peruvian sample
 #' @docType data
 #' @usage data(SOC)
@@ -34,5 +36,8 @@
 #'   \item{\code{Manejability}}{integer Total Manejeability calculated by adding ítems}
 #'   \item{\code{Meaningfulness}}{integer Meaningfulness}
 #'}
-#' @source \url{http://somewhere.important.com/}
+#' @source \url{https://github.com/jsaraviadrago/bluegrafir/blob/master/data/SOC.csv}
+#' @examples
+#' data(SOC)
 "SOC"
+

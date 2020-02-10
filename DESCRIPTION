@@ -8,7 +8,7 @@ Author: Juan Carlos Saravia <jsaraviadrago@gmail.com>
 Maintainer: Juan Carlos Saravia <jsaraviadrago@gmail.com>
 Description: An implementation of linear transformations and tidy tables for Structural equation modelling, Confirmatory factor analysis (CFA) and average variance error and composite reliability for CFA. 
 License: MIT + file LICENSE
-URL: https://github.com/jsaraviadrago/bluegrafi
+URL: https://github.com/jsaraviadrago/bluegrafir
 Encoding: UTF-8
 LazyData: true
 Imports: 
