@@ -15,8 +15,9 @@ Imports:
 	 dplyr (>= 0.8.3),
 	 GPArotation  	(>= 2014.11-1),
 	 lavaan (>= 0.6-4),
-	 psych (>= 1.8.12)
-RoxygenNote: 7.0.0
+	 psych (>= 1.8.12),
+	 rlang (>= 0.4.3)
+RoxygenNote: 7.0.2
 Suggests: 
     testthat (>= 2.1.0),
     covr
