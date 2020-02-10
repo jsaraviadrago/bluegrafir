@@ -58,20 +58,20 @@ grafi_fit <- function(x, mi.nrows = 5) {
   tabla <- tabla[,c(2,1)]
   analysis <- c("~", "~~", ":=")
   tabla1 <- parameterEstimates(x, standardized=TRUE) %>%
-    filter(op %in% analysis) %>%
-    select('Dep variable'=lhs,
-           Relationship=op,
+    filter(.data$op %in% analysis) %>%
+    select('Dep variable'=.data$lhs,
+           Relationship=.data$op,
            'Ind variable'=.data$rhs,
-           B=est,
+           B=.data$est,
            SE=.data$se,
            Z=.data$z,
            'p-value'=.data$pvalue,
            Beta=.data$std.all)
   tabla2 <- parameterEstimates(x, standardized=TRUE) %>%
-    filter(op == "=~") %>%
-    select('Latent factor'=lhs,
+    filter(.data$op == "=~") %>%
+    select('Latent factor'=.data$lhs,
            'Variable'=.data$rhs,
-           B=est,
+           B=.data$est,
            SE=.data$se,
            Z=.data$z,
            'p-value'=.data$pvalue,
@@ -79,10 +79,10 @@ grafi_fit <- function(x, mi.nrows = 5) {
   mi <- lavaan::inspect(x,"mi")
   mi.order <- mi[order(-mi$mi),]
   tabla3 <- mi.order[1:mi.nrows,] %>%
-    select(Variable_1 = lhs,
-           relationship = op,
+    select(Variable_1 = .data$lhs,
+           relationship = .data$op,
            Variable_2 = .data$rhs,
-           MI = mi)
+           MI = .data$mi)
   tabla <- as.tbl(tabla)
   tabla1 <- as.tbl(tabla1)
   tabla2 <- as.tbl(tabla2)

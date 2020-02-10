@@ -7,7 +7,7 @@
 #' A different formula is needed for when indicators share at least one error covariance.
 #' In this case the total variance is calculated by adding the sum of the unstandarized error variance multiplied by 2.
 #'
-#' @name crel
+#' @name comp_reliability
 #' @seealso Kline, R. (2016). Principles and Practice of Structural Equation Modeling. Fourth Edition. Guilford press. NY.
 #' @seealso Raykov, T. (2004). Behavioral scale realiability and measurement invariance evaluation using latent variable modeling. Behavior therapy, 35, 299-331.
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model with the lavaan package.
@@ -19,12 +19,13 @@
 #' @importFrom dplyr if_else
 #' @importFrom lavaan parameterEstimates
 #' @importFrom lavaan inspect
+#' @importFrom rlang .data
 #' @author Juan Carlos Saravia
-#' @examples \donttest{crel(fit)}
+#' @examples \donttest{comp_reliability(fit)}
 #' @export
-globalVariables(c("op", "variance", "lhs",
-                  "est", "covariance"))
-crel <- function(x) {
+
+
+comp_reliability <- function(x) {
   # Creating sum of beta loadings per factor
   x1 <- data.frame(inspect(x,what="est")$lambda)
   sum_loadings <- data.frame(apply(x1, 2, sum)^2)
@@ -35,15 +36,15 @@ crel <- function(x) {
   v <- v[,1:4]
   v$variance <- if_else(v$lhs == v$rhs,1,0)
   v <- v %>%
-    filter(op == "~~",
-           variance == "1") %>%
-    select(lhs, est)
+    filter(.data$op == "~~",
+           .data$variance == "1") %>%
+    select(.data$lhs, .data$est)
   # Extracting distribution of items per factor
   z<- parameterEstimates(x)
   z <- z[,1:3]
   z <- z %>%
-    filter(op == "=~") %>%
-    select(-op)
+    filter(.data$op == "=~") %>%
+    select(-.data$op)
   z <- left_join(z,v, by = "lhs")
   # Creating sum of error variance per factor
   y <- data.frame(inspect(x,what="est")$theta)
@@ -53,10 +54,10 @@ crel <- function(x) {
   y$rhs <- rownames(y)
   yz <- left_join(z, y ,by = "rhs")
   yz_sum <- yz %>%
-    dplyr::group_by(lhs) %>%
+    dplyr::group_by(.data$lhs) %>%
     dplyr::summarise(sum_error = sum(max),
               Item_number = dplyr::n(),
-              variance_latent = mean(est))
+              variance_latent = mean(.data$est))
   CR <- left_join(yz_sum,sum_loadings, by = "lhs")
   # Amount of latent variables
   var <- inspect(x)$psi
@@ -66,8 +67,8 @@ crel <- function(x) {
   er <- er[,1:3]
   er$covariance <- if_else(er$lhs != er$rhs,1,0)
   er <- er %>%
-    filter(op == "~~",
-           covariance == "1")
+    filter(.data$op == "~~",
+           .data$covariance == "1")
   eval <- dim(er)[1] == var
   if (eval == TRUE) {
     CR$composite_reliability <-(CR$Sum_beta_loadings*CR$variance_latent) / (CR$Sum_beta_loadings*CR$variance_latent + CR$sum_error)
@@ -83,7 +84,7 @@ crel <- function(x) {
 #' This function needs a lavaan object with a model fit to work. It calculates the Average variance extracted for CFA models.
 #' It is the average of the squared standardized pattern coefficients for indicators that depend on the same factor but are specified to measure no other factors.
 #'
-#' @name avex
+#' @name avar_extracted
 #' @seealso Kline, R. (2016). Principles and Practice of Structural Equation Modeling. Fourth Edition. Guilford press. NY.
 #' @seealso Raykov, T. (2004). Behavioral scale realiability and measurement invariance evaluation using latent variable modeling. Behavior therapy, 35, 299-331.
 #' @param x lavaan object: The name of the model fit that was calculated from the specified CFA model in the lavaan package.
@@ -91,17 +92,18 @@ crel <- function(x) {
 #' @importFrom dplyr "%>%"
 #' @importFrom dplyr filter
 #' @importFrom dplyr select
+#' @importFrom rlang .data
 #' @author Juan Carlos Saravia
 #' @examples \donttest{ave(fit)}
 #' @export
-globalVariables(c("op", "lhs", "AVE"))
-avex <- function(x) {
+
+avar_extracted <- function(x) {
   # Extracting distribution of items per factor
   z<- lavaan::parameterEstimates(x)
   z <- z[,1:3]
   z <- z %>%
-    filter(op == "=~") %>%
-    select(-op)
+    filter(.data$op == "=~") %>%
+    select(-.data$op)
   # Creating sum of error variance per factor
   y <- data.frame(lavaan::inspect(x,what="std")$theta)
   y$max <- apply(y,2,max)
@@ -110,12 +112,12 @@ avex <- function(x) {
   y$rhs <- rownames(y)
   yz <- dplyr::left_join(z, y ,by = "rhs")
   yz_sum <- yz %>%
-    dplyr::group_by(lhs) %>%
+    dplyr::group_by(.data$lhs) %>%
     dplyr::summarise(sum_error = sum(max),
               Item_number = dplyr::n())
   yz_sum$AVE <- yz_sum$sum_error/yz_sum$Item_number
   yz_sum <- yz_sum %>%
-    select(lhs, AVE)
+    select(.data$lhs, .data$AVE)
   yz_sum
 }
 
