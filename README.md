@@ -36,7 +36,7 @@ The goal of `bluegrafir` is to handle useful psychometric tools for structural e
 
 - **grafi_distribution**: This function helps organize information by setting a nice table of frequencies, proportions and cumulative frequencies from categorical variables. 
 
-### _crel_ and _avex_
+### _comp_reliability_ and _avar_extracted_
 
 - **comp_reliability**: This function calculates Composite reliability and it is based on the formulas in Raykov, T. (2004). Behavioral scale realiability and measurement invariance evaluation using latent variable modeling. Behavior therapy, 35, 299-331.
 
