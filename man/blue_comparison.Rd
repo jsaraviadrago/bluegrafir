@@ -24,7 +24,8 @@ The output is a vector of a transformed value that compares a recent measurement
 This function is used to compare results between groups or years with parameters that you establish.
 }
 \examples{
-\donttest{blue2(x,y,z,a)}
+data_example <- c(1,2,3,4,5)
+blue_comparison(data_example, parfmean = 2, parfsd = 0.5)
 }
 \author{
 Juan Carlos Saravia

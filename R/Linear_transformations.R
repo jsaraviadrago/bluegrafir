@@ -8,7 +8,9 @@
 #' @param sdvar parameter for the standard deviation, the default is 100. This is used for the linear transformation and setting a standard deviation different from 1
 #' @return The output is a vector of a transformed value with the mean and standard deviation set with the parameters
 #' @author Juan Carlos Saravia
-#' @examples \donttest{blue(x,y,z)}
+#' @examples
+#'data_example <- c(1,2,3,4,5)
+#'blue_ztransform(data_example, meanvar = 500, sdvar = 100)
 #' @export
 blue_ztransform <- function(x,meanvar = 500,sdvar = 100) {
   standard <- scale(x, center = T, scale = T)
@@ -25,7 +27,9 @@ blue_ztransform <- function(x,meanvar = 500,sdvar = 100) {
 #' @param sdvar parameter for the standard deviation, the default is 100. This is used for the linear transformation and setting a standard deviation different from 1.
 #' @return The output is a vector of a transformed value that compares a recent measurement against a baseline measurement.
 #' @author Juan Carlos Saravia
-#' @examples \donttest{blue2(x,y,z,a)}
+#' @examples
+#' data_example <- c(1,2,3,4,5)
+#' blue_comparison(data_example, parfmean = 2, parfsd = 0.5)
 #' @export
 
 blue_comparison <- function(lmes, parfmean, parfsd,
@@ -50,7 +54,10 @@ blue_comparison <- function(lmes, parfmean, parfsd,
 #' @importFrom dplyr select
 #' @importFrom rlang .data
 #' @author Juan Carlos Saravia
-#' @examples \donttest{blue_zscaling(x,sdev,means,threshold)}
+#' @examples
+#data_example <- c(1,2,3,4,51,1,1,1,1,1,1,2,2,2,2,2,2,2,3,4,5)
+#blue_zscaling(data_example, type_scale = "CumulativeZ")
+#'\donttest{blue_zscaling(x,sdev,means,threshold)}
 #' @export
 
 blue_zscaling <- function(x, sdev = 100, means = 500,
@@ -73,7 +80,7 @@ blue_zscaling <- function(x, sdev = 100, means = 500,
   order.freq$RPdiv100 <- (order.freq$RP)/100
   if (type_scale == "CumulativeZ") {
     order.freq$Zscore <- stats::qnorm(order.freq$RPdiv100)
-  } else if(type_scale == "Zscore"){
+  } else if(type_scale == "Zscores"){
       order.freq$Zscore <- scale(order.freq$RPdiv100,
                                center = T,
                                scale = T)

@@ -150,11 +150,12 @@ grafi_reliability <- function(x) {
 #' @importFrom dplyr "%>%"
 #' @importFrom rlang .data
 #' @author Juan Carlos Saravia
-#' @examples \donttest{grafi_distribution(x)}
+#' @examples
+#' data_prueba <- c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8)
+#' grafi_distribution(data_prueba)
 #' @export
 #'
 #'
-#globalVariables(c("x"))
 grafi_distribution <- function(x) {
   freq <- data.frame(table(x))
   prop <- data.frame(prop.table(table(x)))
@@ -162,9 +163,11 @@ grafi_distribution <- function(x) {
   names(tabla)[1] <- "Vector1"
   tabla <- tabla %>%
     dplyr::select(Categories = .data$Vector1,
-           Frequencies = .data$Freq.x,
-           Proportions = .data$Freq.y)
-  tabla <- transform(tabla, CumFreq = cumsum(.data$Frequencies))
-  tabla <- dplyr::as.tbl(tabla)
+                  Frequencies = .data$Freq.x,
+                  Proportions = .data$Freq.y)
+  tabla
+  tabla <- tabla %>% dplyr::as_tibble() %>%
+    mutate(
+      CumFreq = cumsum(.data$Frequencies))
   tabla
 }

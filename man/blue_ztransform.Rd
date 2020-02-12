@@ -20,7 +20,8 @@ The output is a vector of a transformed value with the mean and standard deviati
 This function is used to standardize your results and transform them with a set mean and standard deviation.
 }
 \examples{
-\donttest{blue(x,y,z)}
+data_example <- c(1,2,3,4,5)
+blue_ztransform(data_example, meanvar = 500, sdvar = 100)
 }
 \author{
 Juan Carlos Saravia

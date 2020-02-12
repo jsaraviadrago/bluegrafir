@@ -16,7 +16,8 @@ a tibble of 4 columns with categories, frequencies, proportions and cumulative f
 This function just needs a vector and it is useful if you want to make a tidy table of distributions of items. It works with the map function from the purrr package which enables you to calculate multiple ordered tables of items.
 }
 \examples{
-\donttest{grafi_distribution(x)}
+data_prueba <- c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8)
+grafi_distribution(data_prueba)
 }
 \author{
 Juan Carlos Saravia
