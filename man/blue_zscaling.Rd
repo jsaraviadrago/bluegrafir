@@ -24,7 +24,8 @@ It calculates the cumulative frequency of a continous variable, transforms this 
 After that, it standardize scores and then transforms values with a mean of 500 and standard deviation of 100 (default).
 }
 \examples{
-\donttest{blue_zscaling(x,sdev,means,threshold)}
+data_example <- c(1,2,3,4,51,1,1,1,1,1,1,2,2,2,2,2,2,2,3,4,5)
+blue_zscaling(data_example, type_scale = "CumulativeZ")
 }
 \author{
 Juan Carlos Saravia

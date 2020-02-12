@@ -55,9 +55,8 @@ blue_comparison <- function(lmes, parfmean, parfsd,
 #' @importFrom rlang .data
 #' @author Juan Carlos Saravia
 #' @examples
-#data_example <- c(1,2,3,4,51,1,1,1,1,1,1,2,2,2,2,2,2,2,3,4,5)
-#blue_zscaling(data_example, type_scale = "CumulativeZ")
-#'\donttest{blue_zscaling(x,sdev,means,threshold)}
+#'data_example <- c(1,2,3,4,51,1,1,1,1,1,1,2,2,2,2,2,2,2,3,4,5)
+#'blue_zscaling(data_example, type_scale = "CumulativeZ")
 #' @export
 
 blue_zscaling <- function(x, sdev = 100, means = 500,
@@ -81,26 +80,29 @@ blue_zscaling <- function(x, sdev = 100, means = 500,
   if (type_scale == "CumulativeZ") {
     order.freq$Zscore <- stats::qnorm(order.freq$RPdiv100)
   } else if(type_scale == "Zscores"){
-      order.freq$Zscore <- scale(order.freq$RPdiv100,
+    order.freq$Zscore <- scale(order.freq$RPdiv100,
                                center = T,
                                scale = T)
   } else {
     order.freq$Zscore <- stats::qnorm(order.freq$RPdiv100)
   }
   order.freq$Tscore <- ((order.freq$Zscore)*sdev)+means
+  order.freq <- order.freq  %>%
+    mutate( Threshold =
+              case_when( Zscore < -1 ~ "Bajo",
+                         Zscore < 1 ~ "Medio",
+                         Zscore >= 1 ~ "Alto"))
   baremos <- order.freq %>%
     select(Puntajes_Brutos = .data$x,
            Z = .data$Zscore,
-           Threshold = .data$cortes)
+           .data$Threshold)
   baremos <- dplyr::as.tbl(baremos)
   summarytab <- baremos %>%
     dplyr::group_by(.data$Threshold) %>%
-    dplyr::summarise(MinPB = dplyr::first(.data$Puntajes_Brutos),
-              MaxPB = dplyr::last(.data$Puntajes_Brutos),
-              MinZ = min(.data$Z, na.rm = T),
-              MaxZ = max(.data$Z, na.rm = T))
-  list(baremos,summarytab)
-}
+    dplyr::summarise(ThresholdPB = dplyr::first(.data$Puntajes_Brutos))
+  summarytab<-  summarytab %>%
+    dplyr::filter(.data$Threshold != "Bajo")
+  summarytab}
 
 #' This functions calculates parameters to equate measurements in a IRT framework
 #'
