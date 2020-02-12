@@ -4,10 +4,12 @@
 \alias{blue_zscaling}
 \title{This function can be used to do linear percentile scaling. It helps to create thresholds for surveys and continous variables.}
 \usage{
-blue_zscaling(x, sdev = 100, means = 500, type_scale = "CumulativeZ")
+blue_zscaling(x, data, sdev = 100, means = 500, type_scale = "CumulativeZ")
 }
 \arguments{
 \item{x}{vector of continous values}
+
+\item{data}{data from the continous values of x parameter}
 
 \item{sdev}{standard deviation which is to be assigned for the transformation, default value is 100.}
 
@@ -24,8 +26,10 @@ It calculates the cumulative frequency of a continous variable, transforms this 
 After that, it standardize scores and then transforms values with a mean of 500 and standard deviation of 100 (default).
 }
 \examples{
-data_example <- c(1,2,3,4,51,1,1,1,1,1,1,2,2,2,2,2,2,2,3,4,5)
-blue_zscaling(data_example, type_scale = "CumulativeZ")
+data_example <- data.frame(ID = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8),
+puntaje = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8))
+blue_zscaling(data_example$puntaje,data_example,
+type_scale = "CumulativeZ")
 }
 \author{
 Juan Carlos Saravia

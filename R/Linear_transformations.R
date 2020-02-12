@@ -44,6 +44,7 @@ blue_comparison <- function(lmes, parfmean, parfsd,
 #' After that, it standardize scores and then transforms values with a mean of 500 and standard deviation of 100 (default).
 #' @name blue_zscaling
 #' @param x vector of continous values
+#' @param data data from the continous values of x parameter
 #' @param sdev standard deviation which is to be assigned for the transformation, default value is 100.
 #' @param means mean which is to be assigned for the linear transformation. Default value is 500.
 #' @param type_scale logical parameter were TRUE assigns three thresholds. It is based on a normal distribution were values lower than -1 standard deviation from the mean are low, values higher than 1 standard deviation are high and values in between are medium (default).
@@ -55,12 +56,16 @@ blue_comparison <- function(lmes, parfmean, parfsd,
 #' @importFrom rlang .data
 #' @author Juan Carlos Saravia
 #' @examples
-#'data_example <- c(1,2,3,4,51,1,1,1,1,1,1,2,2,2,2,2,2,2,3,4,5)
-#'blue_zscaling(data_example, type_scale = "CumulativeZ")
+#'data_example <- data.frame(ID = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8),
+#'puntaje = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8))
+
+#'blue_zscaling(data_example$puntaje,data_example,
+#' type_scale = "CumulativeZ")
 #' @export
 
-blue_zscaling <- function(x, sdev = 100, means = 500,
+blue_zscaling <- function(x, data, sdev = 100, means = 500,
                           type_scale = "CumulativeZ"){
+  x2 <- data.frame(x)
   order.freq <- data.frame(table(x))
   order.freq$CumFreq <- cumsum(order.freq$Freq)
   val1 <- data.frame((0.5*order.freq$Freq)/(sum(order.freq$Freq))*100)
@@ -102,7 +107,19 @@ blue_zscaling <- function(x, sdev = 100, means = 500,
     dplyr::summarise(ThresholdPB = dplyr::first(.data$Puntajes_Brutos))
   summarytab<-  summarytab %>%
     dplyr::filter(.data$Threshold != "Bajo")
-  summarytab}
+  Alto <- summarytab %>%
+    dplyr::filter(.data$Threshold == "Alto") %>%
+    dplyr::select(.data$ThresholdPB) %>%
+    as.numeric()
+  Medio <- summarytab %>%
+    dplyr::filter(.data$Threshold  == "Medio") %>%
+    dplyr::select(.data$ThresholdPB) %>%
+    as.numeric()
+  x2$Levels <- dplyr::if_else(x2$x >= Alto, "Alto",
+                              dplyr::if_else(x2$x >= Medio, "Medio",
+                                             "Bajo"))
+  data <- data.frame(data,Levels = x2[,2])
+  list(summarytab,data)}
 
 #' This functions calculates parameters to equate measurements in a IRT framework
 #'
