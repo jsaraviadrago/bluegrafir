@@ -4,10 +4,12 @@
 \alias{blue_comparison}
 \title{This function is used to compare results between groups or years with parameters that you establish.}
 \usage{
-blue_comparison(lmes, parfmean, parfsd, meanvar = 500, sdvar = 100)
+blue_comparison(lmes, data, parfmean, parfsd, meanvar = 500, sdvar = 100)
 }
 \arguments{
 \item{lmes}{vector with the most recent measurement or the group you want to compare against the original parameters}
+
+\item{data}{data.frame from the vector with the most recent measurement}
 
 \item{parfmean}{mean with the baseline parameter to compare against.}
 
@@ -24,8 +26,11 @@ The output is a vector of a transformed value that compares a recent measurement
 This function is used to compare results between groups or years with parameters that you establish.
 }
 \examples{
-data_example <- c(1,2,3,4,5)
-blue_comparison(data_example, parfmean = 2, parfsd = 0.5)
+
+data_example <- data.frame( ID = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8),
+                          puntaje = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8))
+blue_comparison(data_example$puntaje, data_example,
+ parfmean = 2, parfsd = 0.5)
 }
 \author{
 Juan Carlos Saravia

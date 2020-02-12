@@ -4,10 +4,12 @@
 \alias{blue_ztransform}
 \title{Linear transformations to compare measurements between years}
 \usage{
-blue_ztransform(x, meanvar = 500, sdvar = 100)
+blue_ztransform(x, data, meanvar = 500, sdvar = 100)
 }
 \arguments{
 \item{x}{vector that you want to change scale.}
+
+\item{data}{dataframe that goes with continous vector}
 
 \item{meanvar}{parameter for the mean, the default is 500. This is used for the linear transformation and setting a mean different from 0}
 
@@ -20,8 +22,11 @@ The output is a vector of a transformed value with the mean and standard deviati
 This function is used to standardize your results and transform them with a set mean and standard deviation.
 }
 \examples{
-data_example <- c(1,2,3,4,5)
-blue_ztransform(data_example, meanvar = 500, sdvar = 100)
+
+data_example <- data.frame( ID = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8),
+                          puntaje = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8))
+blue_ztransform(data_example$puntaje,data_example,
+meanvar = 500, sdvar = 100)
 }
 \author{
 Juan Carlos Saravia

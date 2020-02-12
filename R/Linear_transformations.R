@@ -4,23 +4,29 @@
 #'
 #' @name blue_ztransform
 #' @param x vector that you want to change scale.
+#' @param data dataframe that goes with continous vector
 #' @param meanvar parameter for the mean, the default is 500. This is used for the linear transformation and setting a mean different from 0
 #' @param sdvar parameter for the standard deviation, the default is 100. This is used for the linear transformation and setting a standard deviation different from 1
 #' @return The output is a vector of a transformed value with the mean and standard deviation set with the parameters
 #' @author Juan Carlos Saravia
 #' @examples
-#'data_example <- c(1,2,3,4,5)
-#'blue_ztransform(data_example, meanvar = 500, sdvar = 100)
+#'
+#'data_example <- data.frame( ID = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8),
+#'                           puntaje = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8))
+#'blue_ztransform(data_example$puntaje,data_example,
+#' meanvar = 500, sdvar = 100)
 #' @export
-blue_ztransform <- function(x,meanvar = 500,sdvar = 100) {
+blue_ztransform <- function(x, data, meanvar = 500,sdvar = 100) {
   standard <- scale(x, center = T, scale = T)
-  conversion <- (standard*sdvar)+meanvar
-}
+  conversion <- data.frame((standard*sdvar)+meanvar)
+  data <- data.frame(data, Transf_500 = conversion[,1])
+  data}
 
 #' This function is used to compare results between groups or years with parameters that you establish.
 #'
 #' @name blue_comparison
 #' @param lmes vector with the most recent measurement or the group you want to compare against the original parameters
+#' @param data data.frame from the vector with the most recent measurement
 #' @param parfmean mean with the baseline parameter to compare against.
 #' @param parfsd sd with the baseline parameter to compare against.
 #' @param meanvar parameter for the mean, the default is 500. This is used for the linear transformation and setting a mean different from 0
@@ -28,15 +34,19 @@ blue_ztransform <- function(x,meanvar = 500,sdvar = 100) {
 #' @return The output is a vector of a transformed value that compares a recent measurement against a baseline measurement.
 #' @author Juan Carlos Saravia
 #' @examples
-#' data_example <- c(1,2,3,4,5)
-#' blue_comparison(data_example, parfmean = 2, parfsd = 0.5)
+#'
+#'data_example <- data.frame( ID = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8),
+#'                           puntaje = c(1,2,3,4,5,6,7,78,7,7,7,7,7,7,7,7,8,8,8,8,8))
+#' blue_comparison(data_example$puntaje, data_example,
+#'  parfmean = 2, parfsd = 0.5)
 #' @export
 
-blue_comparison <- function(lmes, parfmean, parfsd,
-                  meanvar = 500, sdvar = 100) {
+blue_comparison <- function(lmes,data, parfmean, parfsd,
+                            meanvar = 500, sdvar = 100) {
   equate <- (lmes-parfmean)/parfsd
-  conversion <- (equate*sdvar)+meanvar
-}
+  conversion <- data.frame((equate*sdvar)+meanvar)
+  data_final <- data.frame(data, Transf_500 = conversion[,1])
+  data_final}
 
 #' This function can be used to do linear percentile scaling. It helps to create thresholds for surveys and continous variables.
 #'
