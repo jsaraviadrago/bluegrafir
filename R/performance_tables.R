@@ -167,7 +167,7 @@ grafi_distribution <- function(x) {
                   Proportions = .data$Freq.y)
   tabla
   tabla <- tabla %>% dplyr::as_tibble() %>%
-    mutate(
+    dplyr::mutate(
       CumFreq = cumsum(.data$Frequencies))
   tabla
 }
