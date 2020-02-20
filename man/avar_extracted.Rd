@@ -17,7 +17,16 @@ This function needs a lavaan object with a model fit to work. It calculates the 
 It is the average of the squared standardized pattern coefficients for indicators that depend on the same factor but are specified to measure no other factors.
 }
 \examples{
-\donttest{ave(fit)}
+#' #'set.seed(123456)
+data <- data.frame(replicate(10,sample(1:5,1000,rep=TRUE)))
+
+m2 <- 'f=~ X1 + X2 + X3+X4+X5+X6+X7+X8+X9+X10'
+fit2 <- lavaan::cfa(m2, data = data)
+lavaan::summary(fit2, fit.measures = TRUE,
+       standardized = TRUE)
+avar_extracted(fit2)
+
+
 }
 \seealso{
 Kline, R. (2016). Principles and Practice of Structural Equation Modeling. Fourth Edition. Guilford press. NY.

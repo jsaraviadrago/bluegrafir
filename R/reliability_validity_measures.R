@@ -21,7 +21,16 @@
 #' @importFrom lavaan inspect
 #' @importFrom rlang .data
 #' @author Juan Carlos Saravia
-#' @examples \donttest{comp_reliability(fit)}
+#' @examples
+#' #'set.seed(123456)
+#'data <- data.frame(replicate(10,sample(1:5,1000,rep=TRUE)))
+#'
+#'m2 <- 'f=~ X1 + X2 + X3+X4+X5+X6+X7+X8+X9+X10'
+#'fit2 <- lavaan::cfa(m2, data = data)
+#'lavaan::summary(fit2, fit.measures = TRUE,
+#'        standardized = TRUE)
+#'comp_reliability(fit2)
+#'
 #' @export
 
 
@@ -94,7 +103,18 @@ comp_reliability <- function(x) {
 #' @importFrom dplyr select
 #' @importFrom rlang .data
 #' @author Juan Carlos Saravia
-#' @examples \donttest{ave(fit)}
+#' @examples
+#'#' #'set.seed(123456)
+#'data <- data.frame(replicate(10,sample(1:5,1000,rep=TRUE)))
+#'
+#'m2 <- 'f=~ X1 + X2 + X3+X4+X5+X6+X7+X8+X9+X10'
+#'fit2 <- lavaan::cfa(m2, data = data)
+#'lavaan::summary(fit2, fit.measures = TRUE,
+#'        standardized = TRUE)
+#'avar_extracted(fit2)
+#'
+#'
+#   \donttest{ave(fit)}
 #' @export
 
 avar_extracted <- function(x) {

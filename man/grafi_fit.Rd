@@ -21,7 +21,14 @@ I want to thank Rose Hartmann because with her web page I was able to make one c
 This function needs a lavaan object with a model fit to work. It creates a table of all fit indices for a SEM model.
 }
 \examples{
-\donttest{grafi2(fit)}
+set.seed(123456)
+data <- data.frame(replicate(10,sample(1:5,1000,rep=TRUE)))
+
+m2 <- 'f=~ X1 + X2 + X3+X4+X5+X6+X7+X8+X9+X10'
+fit2 <- lavaan::cfa(m2, data = data)
+lavaan::summary(fit2, fit.measures = TRUE,
+       standardized = TRUE)
+grafi_fit(fit2)
 }
 \author{
 Juan Carlos Saravia

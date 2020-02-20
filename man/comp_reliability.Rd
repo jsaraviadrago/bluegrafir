@@ -21,7 +21,15 @@ A different formula is needed for when indicators share at least one error covar
 In this case the total variance is calculated by adding the sum of the unstandarized error variance multiplied by 2.
 }
 \examples{
-\donttest{comp_reliability(fit)}
+#'set.seed(123456)
+data <- data.frame(replicate(10,sample(1:5,1000,rep=TRUE)))
+
+m2 <- 'f=~ X1 + X2 + X3+X4+X5+X6+X7+X8+X9+X10'
+fit2 <- lavaan::cfa(m2, data = data)
+lavaan::summary(fit2, fit.measures = TRUE,
+       standardized = TRUE)
+comp_reliability(fit2)
+
 }
 \seealso{
 Kline, R. (2016). Principles and Practice of Structural Equation Modeling. Fourth Edition. Guilford press. NY.

@@ -16,7 +16,11 @@ The output is a data.frame that gives you fit McDonalds Omega coefficients in a 
 This function needs a psych and GPArotation object from the omegaSem function to work. It creates a table of all fit indices for a CFA and SEM model.
 }
 \examples{
-\donttest{grafi2(fit)}
+set.seed(123456)
+data <- data.frame(replicate(10,sample(1:5,1000,rep=TRUE)))
+data.rel <- psych::omegaSem(data)
+
+grafi_reliability(data.rel)
 }
 \author{
 Juan Carlos Saravia

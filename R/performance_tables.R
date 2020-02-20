@@ -16,10 +16,16 @@
 #' @importFrom lavaan parameterEstimates
 #' @importFrom rlang .data
 #' @author Juan Carlos Saravia
-#' @examples \donttest{grafi2(fit)}
+#' @examples
+#'set.seed(123456)
+#'data <- data.frame(replicate(10,sample(1:5,1000,rep=TRUE)))
+#'
+#'m2 <- 'f=~ X1 + X2 + X3+X4+X5+X6+X7+X8+X9+X10'
+#'fit2 <- lavaan::cfa(m2, data = data)
+#'lavaan::summary(fit2, fit.measures = TRUE,
+#'        standardized = TRUE)
+#'grafi_fit(fit2)
 #' @export
-#'
-#'
 #'
 
 grafi_fit <- function(x, mi.nrows = 5) {
@@ -103,7 +109,12 @@ grafi_fit <- function(x, mi.nrows = 5) {
 #' @importFrom dplyr select
 #' @importFrom rlang .data
 #' @author Juan Carlos Saravia
-#' @examples \donttest{grafi2(fit)}
+#' @examples
+#' set.seed(123456)
+#'data <- data.frame(replicate(10,sample(1:5,1000,rep=TRUE)))
+#'data.rel <- psych::omegaSem(data)
+#'
+#'grafi_reliability(data.rel)
 #' @export
 
 grafi_reliability <- function(x) {
@@ -119,7 +130,7 @@ grafi_reliability <- function(x) {
 
   omegacoef$names <- gsub("[*]", "", omegacoef$names)
   # Check which reliability stands for which factor.
-  factors <- .data$omegarel$omegaSem$schmid$sl
+  factors <- .data$x$omegaSem$schmid$sl
   factors <- factors[,c(factor.names)]
   factors <- data.frame(factors)
   factors <- abs(factors)
