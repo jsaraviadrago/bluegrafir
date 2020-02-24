@@ -8,8 +8,12 @@
 #     data <- data.frame(data, Transf_500 = conversion[,1])
 #     data}
 # expect_equal(blue_ztransform())
+#})
 
-
+test_that("multiplication works", {
+  expect_equal(2 * 2, 4)
 })
+
+
 
 
