@@ -176,7 +176,6 @@ grafi_distribution <- function(x) {
     dplyr::select(Categories = .data$Vector1,
                   Frequencies = .data$Freq.x,
                   Proportions = .data$Freq.y)
-  tabla
   tabla <- tabla %>% dplyr::as_tibble() %>%
     dplyr::mutate(
       CumFreq = cumsum(.data$Frequencies))
