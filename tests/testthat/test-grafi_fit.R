@@ -13,7 +13,7 @@ test_that("Table of fit statistics", {
              "pvalue.scaled", "cfi.scaled",
              "tli.scaled", "rmsea.scaled")
   tabla$indices <- rownames(tabla)
-  library(dplyr)
+
   tabla <- tabla %>%
     filter(indices %in% names)
   estimador <- nrow(tabla)

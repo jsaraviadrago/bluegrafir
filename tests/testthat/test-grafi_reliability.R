@@ -10,7 +10,7 @@ test_that("Table of Mcdonald's Omega", {
   factor.names <- rownames(omegacoef)
   factor.names <- factor.names[!factor.names %in%
                                  "g"]
-  library(dplyr)
+
   omegacoef <- omegacoef %>%
     select(total)
   omegacoef$names <- rownames(omegacoef)

@@ -8,7 +8,7 @@ test_that("Calculating average variance extracted", {
   # Extracting distribution of items per factor
   z<- lavaan::parameterEstimates(m1.cfa)
   z <- z[,1:3]
-  library(dplyr)
+
   z <- z %>%
     filter(op == "=~") %>%
     select(-op)

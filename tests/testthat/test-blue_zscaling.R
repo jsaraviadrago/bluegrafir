@@ -28,7 +28,7 @@ test_that("Cumulative Z scaling", {
   order.freq$RPdiv100 <- (order.freq$RP)/100
   order.freq$Zscore <- stats::qnorm(order.freq$RPdiv100)
   order.freq$Tscore <- ((order.freq$Zscore)*sdev)+means
-  library(dplyr)
+
 
   order.freq <- order.freq  %>%
     dplyr::mutate( Threshold =

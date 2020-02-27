@@ -13,7 +13,7 @@ test_that("Calculating composite reliability", {
   v <- lavaan::parameterEstimates(m1.cfa)
   v <- v[,1:4]
   v$variance <- dplyr::if_else(v$lhs == v$rhs,1,0)
-  library(dplyr)
+
   v <- v %>%
     filter(op == "~~",
            variance == "1") %>%
