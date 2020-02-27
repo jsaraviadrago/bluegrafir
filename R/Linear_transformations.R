@@ -90,7 +90,6 @@ blue_zscaling <- function(x, data, sdev = 100, means = 500,
   order.freq[2:nrow(order.freq),4] <-  RPcalc
   order.freq <- order.freq %>%
     select(-freqrp, -RPcalc)
-  order.freq
   order.freq$RPdiv100 <- (order.freq$RP)/100
   if (type_scale == "CumulativeZ") {
     order.freq$Zscore <- stats::qnorm(order.freq$RPdiv100)
