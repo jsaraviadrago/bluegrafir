@@ -130,7 +130,7 @@ grafi_reliability <- function(x) {
 
   omegacoef$names <- gsub("[*]", "", omegacoef$names)
   # Check which reliability stands for which factor.
-  factors <- .data$x$omegaSem$schmid$sl
+  factors <- x$omegaSem$schmid$sl
   factors <- factors[,c(factor.names)]
   factors <- data.frame(factors)
   factors <- abs(factors)
