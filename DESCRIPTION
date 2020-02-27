@@ -1,7 +1,7 @@
 Package: bluegrafir
 Type: Package
 Title: Psychometric tools for structural equation models and scale comparisons
-Version: 0.2.0
+Version: 0.5.0
 Author@R: person("Juan Carlos", "Saravia", email = "jsaraviadrago@gmail.com",
 	role = c("aut", "cre"))
 Author: Juan Carlos Saravia <jsaraviadrago@gmail.com>
