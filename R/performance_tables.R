@@ -227,6 +227,9 @@ grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups 
     items.measure,
     items.names,
     stringsAsFactors=F)
+  groups <- 1:groups
+  groups <- paste0("D",groups)
+
 
   pe <-
     ggplot2::ggplot(persons.measure, ggplot2::aes(x=.data$personas)) +
@@ -254,7 +257,7 @@ grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups 
                                       face = "italic", size = 14)) +
     ggplot2::labs(x = "", y = "Items") +
     ggplot2::scale_x_continuous(limits=c(-4, 4), breaks=seq(-4,4,by=0.5)) +
-    ggplot2::scale_y_continuous(labels = c("D1","D2","D3","D4","D5"))
+    ggplot2::scale_y_continuous(labels = groups)
   grafica <- grid.arrange(it,pe, ncol=2, widths=c(1,1), top = " ")
 
 }
