@@ -191,11 +191,14 @@ grafi_distribution <- function(x) {
 #' @param items.measure Item's difficulties
 #' @param items.names Item's names
 #' @param groups amounts of groups that the items are seperated
+#' @import ggplot2
 #' @importFrom rlang .data
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom gridExtra grid.arrange
 #' @return a ggplot histogram of amount of people and a grapha of item difficulty
 #' @author Juan Carlos Saravia
 #' @examples
-#'/donttest{
+#'
 #' personas.data <- data.frame(personas=sort(round(rnorm(500, 0,1),3)))
 #'
 #' items.data <- data.frame(
@@ -209,15 +212,14 @@ grafi_distribution <- function(x) {
 #'                                      paste("IT_EX",items.data$items_n, sep="_")))
 #'
 #'
-#'grafi_wrightmap(personas.data,items.data$items,items.data$items_c)}
+#'grafi_wrightmap(personas.data,items.data$items,items.data$items_c)
 #'
 #'
 #' @export
 
-
 grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups = 5){
   persons.measure <- data.frame(persons.measure)
-  persons.measure[,1] <- "personas"
+  names(persons.measure)[1] <- "personas"
   items.measure <- data.frame(items.measure)
   items.data <- data.frame(
     items_n = as.numeric(1:nrow(items.measure)),
@@ -229,7 +231,7 @@ grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups 
   pe <-
     ggplot2::ggplot(persons.measure, ggplot2::aes(x=.data$personas)) +
     ggplot2::coord_flip() +
-    ggplot2::geom_histogram(ggplot2::aes(y = (ggplot2::..count..)),
+    ggplot2::geom_histogram(ggplot2::aes(y = (.data$..count..)),
                    binwidth=0.5, fill="#33b8ff",
                    color = "#339cff") +
     ggplot2::labs(x = "", y = "Personas") +
@@ -252,7 +254,7 @@ grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups 
                                       face = "italic", size = 14)) +
     ggplot2::labs(x = "", y = "Items") +
     ggplot2::scale_x_continuous(limits=c(-4, 4), breaks=seq(-4,4,by=0.5)) +
-    ggplot2::scale_y_continuous(labels = c(as.factor(groups)))
+    ggplot2::scale_y_continuous(labels = c("D1","D2","D3","D4","D5"))
   grafica <- grid.arrange(it,pe, ncol=2, widths=c(1,1), top = " ")
 
 }

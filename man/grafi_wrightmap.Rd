@@ -22,7 +22,7 @@ a ggplot histogram of amount of people and a grapha of item difficulty
 This function needs two vectors (person's abilities and items difficulties). With that information it will make a nice wright map
 }
 \examples{
-/donttest{
+
 personas.data <- data.frame(personas=sort(round(rnorm(500, 0,1),3)))
 
 items.data <- data.frame(
@@ -36,7 +36,7 @@ items.data <- cbind(items.data,
                                      paste("IT_EX",items.data$items_n, sep="_")))
 
 
-grafi_wrightmap(personas.data,items.data$items,items.data$items_c)}
+grafi_wrightmap(personas.data,items.data$items,items.data$items_c)
 
 
 }
