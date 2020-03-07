@@ -221,6 +221,7 @@ grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups 
   persons.measure <- data.frame(persons.measure)
   names(persons.measure)[1] <- "personas"
   items.measure <- data.frame(items.measure)
+  names(items.measure)[1] <- "items.measure"
   items.data <- data.frame(
     items_n = as.numeric(1:nrow(items.measure)),
     items_g = ceiling(stats::runif(nrow(items.measure),0,groups)),
