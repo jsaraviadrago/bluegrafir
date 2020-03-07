@@ -36,7 +36,7 @@ items.data <- cbind(items.data,
                                      paste("IT_EX",items.data$items_n, sep="_")))
 
 
-grafi_wrightmap(personas.data,items.data$items,items.data$items_c)
+grafi_wrightmap(personas.data$personas,items.data$items,items.data$items_c)
 
 
 }

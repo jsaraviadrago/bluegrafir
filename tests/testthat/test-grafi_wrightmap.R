@@ -3,8 +3,10 @@ test_that("Wright map", {
   library(ggrepel)
   library(gridExtra)
 
+  set.seed(1234)
   personas.data <- data.frame(individuos=sort(round(rnorm(500, 0,1),3)))
 
+set.seed(9876)
   items.data1 <- data.frame(
     items_n1 = as.numeric(seq(1:36)),
     items_g1 = ceiling(runif(36, 0, 5)),
@@ -22,17 +24,15 @@ test_that("Wright map", {
 
   groups <- 5
 
-
-
   persons.measure <- data.frame(personas.data)
   names(persons.measure)[1] <- "personas"
-  items.measurement <- data.frame(items.measure)
+  items.measurement <- data.frame(items.data1$items1)
   names(items.measurement)[1] <- "items.measure2"
   items.data <- data.frame(
     items_n = as.numeric(1:nrow(items.measurement)),
     items_g = ceiling(stats::runif(nrow(items.measurement),0,groups)),
-    items.measure2,
-    items.names,
+    items.measure2 = items.measurement$items.measure2,
+    items.names = items.data1$items_c,
     stringsAsFactors=F)
   groups <- 1:groups
   groups <- paste0("D",groups)
@@ -65,12 +65,10 @@ test_that("Wright map", {
     ggplot2::labs(x = "", y = "Items") +
     ggplot2::scale_x_continuous(limits=c(-4, 4), breaks=seq(-4,4,by=0.5)) +
     ggplot2::scale_y_continuous(labels = groups)
-  grafica <- grid.arrange(it,pe, ncol=2, widths=c(1,1), top = " ")
+  grafica2 <- grid.arrange(it,pe, ncol=2, widths=c(1,1), top = " ")
 
-
-
-  expect_equal(grafi_wrightmap(personas.data$personas,
-                               items.data$items,
-                               items.data$items_c),
-               grafica)
+  expect_equal(grafi_wrightmap(personas.data$individuos,
+                               items.data1$items1,
+                               items.data1$items_c),
+               grafica2)
 })

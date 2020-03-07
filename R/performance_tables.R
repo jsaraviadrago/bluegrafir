@@ -212,20 +212,20 @@ grafi_distribution <- function(x) {
 #'                                      paste("IT_EX",items.data$items_n, sep="_")))
 #'
 #'
-#'grafi_wrightmap(personas.data,items.data$items,items.data$items_c)
+#'grafi_wrightmap(personas.data$personas,items.data$items,items.data$items_c)
 #'
 #'
 #' @export
 
 grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups = 5){
-  persons.measure <- data.frame(personas.data)
+  persons.measure <- data.frame(persons.measure)
   names(persons.measure)[1] <- "personas"
   items.measurement <- data.frame(items.measure)
   names(items.measurement)[1] <- "items.measure2"
   items.data <- data.frame(
     items_n = as.numeric(1:nrow(items.measurement)),
     items_g = ceiling(stats::runif(nrow(items.measurement),0,groups)),
-    items.measure2,
+    items.measure2 = items.measurement$items.measure2,
     items.names,
     stringsAsFactors=F)
   groups <- 1:groups
