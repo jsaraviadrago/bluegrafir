@@ -218,14 +218,14 @@ grafi_distribution <- function(x) {
 #' @export
 
 grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups = 5){
-  persons.measure <- data.frame(persons.measure)
+  persons.measure <- data.frame(personas.data)
   names(persons.measure)[1] <- "personas"
-  items.measure <- data.frame(items.measure)
-  names(items.measure)[1] <- "items.measure"
+  items.measurement <- data.frame(items.measure)
+  names(items.measurement)[1] <- "items.measure2"
   items.data <- data.frame(
-    items_n = as.numeric(1:nrow(items.measure)),
-    items_g = ceiling(stats::runif(nrow(items.measure),0,groups)),
-    items.measure,
+    items_n = as.numeric(1:nrow(items.measurement)),
+    items_g = ceiling(stats::runif(nrow(items.measurement),0,groups)),
+    items.measure2,
     items.names,
     stringsAsFactors=F)
   groups <- 1:groups
@@ -246,11 +246,11 @@ grafi_wrightmap <- function(persons.measure, items.measure, items.names, groups 
     ggplot2::scale_x_continuous(limits=c(-4, 4), breaks=seq(-4,4,by=0.5))
 
   it <-
-    ggplot2::ggplot(items.data, ggplot2::aes(x=.data$items.measure, y=.data$items_g)) +
+    ggplot2::ggplot(items.data, ggplot2::aes(x=.data$items.measure2, y=.data$items_g)) +
     ggplot2::coord_flip() +
     ggplot2::geom_jitter(position = ggplot2::position_jitter(height = .1), size=2,
                          ggplot2::aes(color = "#339cff")) +
-    geom_text_repel(ggplot2::aes(.data$items.measure, .data$items_g, label = .data$items.names), size = 2) +
+    geom_text_repel(ggplot2::aes(.data$items.measure2, .data$items_g, label = .data$items.names), size = 2) +
     ggplot2::theme(legend.position = "none") +
     ggplot2::theme(panel.background = ggplot2::element_blank())+
     ggplot2::theme(axis.title = ggplot2::element_text(color = "black"),
