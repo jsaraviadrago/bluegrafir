@@ -2,6 +2,7 @@
 
 export(avar_extracted)
 export(blue_comparison)
+export(blue_equate)
 export(blue_zscaling)
 export(blue_ztransform)
 export(comp_reliability)

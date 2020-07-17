@@ -138,9 +138,38 @@ blue_zscaling <- function(x, data, sdev = 100, means = 500,
 #' @name blue_equate
 #' @param x vector of continous variable that you want to equate
 #' @param y vector of continous variable that you want to equate to. This variable will have the same metric as parameter x.
+#' @param x_ee vector of continous variable with estimated error.
+#' @param y_ee vector of continous variable with estimated error.
 #' @return The output is a list of tibbles with the calculated parameters, the items and the difficulty of items of one group and the other. Finally a the plot with control bands to check item displacement.
-#'
 #' @author Juan Carlos Saravia
-#' @examples \donttest{bluequate(x,y, err.x, err.y)}
+#' @examples
+#'x1 <- c(1,2,3,4,5,6,7,8,9,10)
+#'y1 <- c(2,3,4,5,6,7,9,8,6,5)
+#'x.ee1 <- c(1,2,3,5,6,7,8,9,20,10)
+#'y.ee1 <- c(9,8,7,6,5,4,3,2,1,2)
+#'equate_table <- data.frame(x1,x.ee1,y1,y.ee1)
+#'blue_equate(equate_table$x1,equate_table$y1,
+#'equate_table$x.ee1,
+#'equate_table$y.ee1)
 #' @export
 
+blue_equate <- function(x,y,x_ee,y_ee){
+  media.x <- mean(x, na.rm = T)
+  std.x <- stats::sd(x, na.rm = T)
+  media.x_ee <- mean(x_ee, na.rm = T)
+  std.x_ee <- stats::sd(x_ee)
+  media.y <- mean(y, na.rm = T)
+  std.y <- stats::sd(y, na.rm = T)
+  media.y_ee <- mean(y_ee, na.rm =T)
+  std.y_ee <- stats::sd(y_ee, na.rm=T)
+  Di_M1_M2 <- media.x - media.y
+  FirstM_in_secondM_a <-  std.y/std.x
+  FirstM_in_secondM_b <- (media.y-(FirstM_in_secondM_a*media.x))
+  SecondM_in_FirstM_a <- std.x/std.y
+  SecondM_in_FirstM_b <- (media.x-(SecondM_in_FirstM_a*media.y))
+  Equate <- data.frame(FirstM_in_secondM_a,
+                       FirstM_in_secondM_b,
+                       SecondM_in_FirstM_a,
+                       SecondM_in_FirstM_b)
+  Equate
+}
